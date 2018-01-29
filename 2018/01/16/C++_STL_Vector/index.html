@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="工具," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -89,22 +89,20 @@
 
 
 
-<meta name="description" content="什么是 Markdown　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，粗体 或者 斜体 某些文字. 　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。">
-<meta name="keywords" content="工具">
+<meta name="description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。　　仅为简单示例，以后会进行内容的扩充。">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown工具集">
-<meta property="og:url" content="http://teddyovo.tech/2016/11/20/markdownTool/index.html">
+<meta property="og:title" content="STL库之Vector容器(可变长数组)">
+<meta property="og:url" content="http://teddyovo.tech/2018/01/16/C++_STL_Vector/index.html">
 <meta property="og:site_name" content="Teddy&#39;s Blog">
-<meta property="og:description" content="什么是 Markdown　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，粗体 或者 斜体 某些文字. 　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。">
+<meta property="og:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。　　仅为简单示例，以后会进行内容的扩充。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://teddyovo.tech/images/posts/markdown/image1.png">
-<meta property="og:image" content="http://teddyovo.tech/images/posts/markdown/image2.png">
-<meta property="og:image" content="http://teddyovo.tech/images/posts/markdown/image3.png">
-<meta property="og:updated_time" content="2017-05-24T01:43:52.000Z">
+<meta property="og:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+<meta property="og:updated_time" content="2018-01-29T09:31:59.814Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Markdown工具集">
-<meta name="twitter:description" content="什么是 Markdown　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，粗体 或者 斜体 某些文字. 　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。">
-<meta name="twitter:image" content="http://teddyovo.tech/images/posts/markdown/image1.png">
+<meta name="twitter:title" content="STL库之Vector容器(可变长数组)">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。　　仅为简单示例，以后会进行内容的扩充。">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
 
 
 
@@ -134,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://teddyovo.tech/2016/11/20/markdownTool/"/>
+  <link rel="canonical" href="http://teddyovo.tech/2018/01/16/C++_STL_Vector/"/>
 
 
 
 
 
-  <title>Markdown工具集 | Teddy's Blog</title>
+  <title>STL库之Vector容器(可变长数组) | Teddy's Blog</title>
   
 
 
@@ -278,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2016/11/20/markdownTool/">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/01/16/C++_STL_Vector/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TeddyZhang">
@@ -295,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Markdown工具集</h1>
+          <h1 class="post-title" itemprop="name headline">STL库之Vector容器(可变长数组)</h1>
         
 
         <div class="post-meta">
@@ -307,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-20T00:00:00+08:00">
-                2016-11-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T00:00:00+08:00">
+                2018-01-16
               </time>
             
 
@@ -330,8 +328,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/USEFUL-TOOLS/" itemprop="url" rel="index">
-                    <span itemprop="name">USEFUL TOOLS</span>
+                  <a href="/categories/SOFTWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">SOFTWARE CODING</span>
                   </a>
                 </span>
 
@@ -348,8 +346,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/11/20/markdownTool/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/11/20/markdownTool/" itemprop="commentsCount"></span>
+                <a href="/2018/01/16/C++_STL_Vector/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/16/C++_STL_Vector/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -371,7 +369,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  491字
+                  757字
                 </span>
               
 
@@ -387,7 +385,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2分钟
+                  3分钟
                 </span>
               
             </div>
@@ -408,26 +406,15 @@
       
 
       
-        <h3 id="什么是-Markdown"><a href="#什么是-Markdown" class="headerlink" title="什么是 Markdown"></a>什么是 Markdown</h3><p>　　Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：如您正在阅读的这篇文章。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字.</p>
-<p>　　很多产品的文档也是用markdown编写的，并且以“README.MD”的文件名保存在软件的目录下面。<br>　　<br><a id="more"></a></p>
-<h3 id="一些基本语法"><a href="#一些基本语法" class="headerlink" title="一些基本语法"></a>一些基本语法</h3><p>标题<br>H1 :# Header 1<br>H2 :## Header 2<br>H3 :### Header 3<br>H4 :#### Header 4<br>H5 :##### Header 5<br>H6 :###### Header 6<br>链接 :<a href="URL">Title</a><br>加粗 :<strong>Bold</strong><br>斜体字 :<em>Italics</em><br><em>删除线 :<del>text</del><br>段落 : 段落之间空一行<br>换行符 : 一行结束时输入两个空格<br>列表 :</em> 添加星号成为一个新的列表项。<br>引用 :&gt; 引用内容<br>内嵌代码 : <code>alert(&#39;Hello World&#39;);</code><br>画水平线 (HR) :——–          </p>
-<p>css 的大部分语法同样可以在 markdown 上使用，但不同的渲染器渲染出来的 markdown 内容样式也不一样，下面这些链接里面有 markdown 基本语法，你也可以在下面几个平台上尝试着写一些。</p>
-<h3 id="一些好用的-Markdown-编辑器"><a href="#一些好用的-Markdown-编辑器" class="headerlink" title="一些好用的 Markdown 编辑器"></a>一些好用的 Markdown 编辑器</h3><p><br></p>
-<p><a href="http://mahua.jser.me/?utm_source=mindstore.io" target="_blank" rel="noopener">MaHua</a> 在线 Markdown 编辑器 ,无须测试。</p>
-<p><br></p>
-<p><img src="/images/posts/markdown/image1.png" alt=""></p>
-<p><br></p>
-<p><a href="http://mdp.tylingsoft.com/" target="_blank" rel="noopener">Markdown Plus</a> 一款 Markdown 编辑器，可以支持添加任务列表、emoji、流程图等。</p>
-<p><br></p>
-<p><img src="/images/posts/markdown/image2.png" alt=""></p>
-<p><br></p>
-<p><a href="https://www.zybuluo.com/cmd/?utm_source=mindstore.io" target="_blank" rel="noopener">Cmd Markdown</a> 作业部落在线 Markdown 编辑器推出桌面版客户端啦，全平台支援。</p>
-<p><img src="/images/posts/markdown/image3.png" alt=""></p>
-<p><a href="https://github.com/MacDownApp/macdown" target="_blank" rel="noopener">Macdown</a> Github 上开源的 Mac 平台上的 Markdown 编辑器</p>
-<p><a href="https://www.gitbook.com/editor?utm_source=mindstore.io" target="_blank" rel="noopener">GitBook Editor</a> 一款团队在线编辑文档工具。可以轻松书写笔记，支持团队协同编辑。同时支持 Markdown 语法，还保持了印象笔记的风格并可在线预览。</p>
-<p><a href="http://www.glamdevelopment.com/outlinely?utm_source=mindstore.io" target="_blank" rel="noopener">Outlinely</a> 界面简洁大方的大纲类 Mac 软件，使用起来很简单，而且支持输出 Markdown 格式。</p>
-<p><a href="http://classeur.io/?utm_source=mindstore.io" target="_blank" rel="noopener">Classeur</a> 实用简洁的 Markdown 写作工具，快速上手。</p>
-<p><a href="https://github.com/geekcompany/DeerResume?utm_source=mindstore.io" target="_blank" rel="noopener">DeerResume</a> 程序员专用 MarkDown 简历制作在线工具。                </p>
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png" alt=""><br>　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。<br>　　而且为了实验使用markdown语法绘制表格的效果。<br>　　仅为简单示例，以后会进行内容的扩充。</p>
+<a id="more"></a>
+<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>　　Vector为向量，属于可变长的动态数组。使用时必须包含<vector>，支持随机访问迭代器，其原理是首先分配一定长的内存用于储存数据，当数据量超出了原定长度，那么需要重新开辟新的空间。正因为如此，所以其在尾部插入元素速度很快，<code>一般</code>为常数时间，而在中间插入慢。<br>注意：<code>所有的STL算法均可以对vector进行操作</code></vector></p>
+<h4 id="Vector成员函数"><a href="#Vector成员函数" class="headerlink" title="Vector成员函数"></a>Vector成员函数</h4><p>1、构造函数初始化<br>| 成员函数 | 作用 |<br>| :——| :——: |<br>| vector(); | 无参构造函数，将容器初始化成空的 |<br>| vector(int n); | 将容器初始化成有n个元素 |<br>| vector(int n, const T &amp; val); | 假定元素类型是T，将容器初始化成有n个元素，每个值都是val |<br>| vector(iterator first, iterator last); | 将容器初始化为与别的容器上的区间[first, last)一致的内容 |<br>2、其他常用函数<br>| 成员函数 | 作用 |<br>| :——| :——: |<br>| void pop_back(); | 删除容器末尾的元素 |<br>| void push_back(const T &amp; val); | 将val添加到容器的尾部 |<br>| int size(); | 返回容器中的个数 |<br>| T &amp; font(); | 返回容器中第一个元素的引用 |<br>| T &amp; back(); | 返回容器中最后一个元素的引用 | </p>
+<p>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; v.end() - v.begin() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; v.size(); i++)&#123;</span><br><span class="line">        v[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    v.at(<span class="number">4</span>) = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="string">","</span>;   <span class="comment">// 随机访问</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2(a, a+<span class="number">5</span>);       <span class="comment">// 构造函数初始化的最后一个，使用指定区间初始化</span></span><br><span class="line">    v2.insert(v2.begin()+<span class="number">2</span>, <span class="number">13</span>);   <span class="comment">// 在v2.begin+2的位置插入13，其余内容向后移动</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; v2.size(); i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v2.at(i) &lt;&lt; <span class="string">","</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="创建并使用二维数组"><a href="#创建并使用二维数组" class="headerlink" title="创建并使用二维数组"></a>创建并使用二维数组</h4><p>使用两个vector进行相互嵌套，可以构成二维数组，比如：<br>　　vector&lt; vector<int> &gt; v(3);<br>即v有三个元素，每个元素都是vector<int> 容器，因此构成二维数组。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">            v[i].push_back(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; v.at(i).at(j) &lt;&lt; <span class="string">","</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></int></int></p>
+<p>运行结果为：<br>0,1,2,3,<br>0,1,2,3,<br>0,1,2,3,</p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
 
       
     </div>
@@ -447,6 +434,35 @@
     <div>
     
        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/01/16/C++_STL_Vector/">STL库之Vector容器(可变长数组)</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
+  <p><span>发布时间:</span>2018年01月16日 - 00:01</p>
+  <p><span>最后更新:</span>2018年01月29日 - 17:01</p>
+  <p><span>原始链接:</span><a href="/2018/01/16/C++_STL_Vector/" title="STL库之Vector容器(可变长数组)">http://teddyovo.tech/2018/01/16/C++_STL_Vector/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/01/16/C++_STL_Vector/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
     
     </div>
 
@@ -489,7 +505,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
           
         </div>
       
@@ -502,8 +518,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/02/Develop_Tool/" rel="next" title="开发常用工具">
-                <i class="fa fa-chevron-left"></i> 开发常用工具
+              <a href="/2018/01/15/C++_STL_01/" rel="next" title="初识STL库(数据结构与算法)">
+                <i class="fa fa-chevron-left"></i> 初识STL库(数据结构与算法)
               </a>
             
           </div>
@@ -512,8 +528,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/26/TimeArticle1/" rel="prev" title="How Being Selfish in the Morning Leads to a More Productive Workday">
-                How Being Selfish in the Morning Leads to a More Productive Workday <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/29/Blog_Update/" rel="prev" title="熬夜更新Blog">
+                熬夜更新Blog <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -735,7 +751,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-Markdown"><span class="nav-number">1.</span> <span class="nav-text">什么是 Markdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些基本语法"><span class="nav-number">2.</span> <span class="nav-text">一些基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些好用的-Markdown-编辑器"><span class="nav-number">3.</span> <span class="nav-text">一些好用的 Markdown 编辑器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector"><span class="nav-number">2.</span> <span class="nav-text">Vector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector成员函数"><span class="nav-number">2.1.</span> <span class="nav-text">Vector成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建并使用二维数组"><span class="nav-number">2.2.</span> <span class="nav-text">创建并使用二维数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">3.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
             
 
           </div>
