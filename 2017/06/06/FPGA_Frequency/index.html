@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FPGA," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang 简介　　前几天总结介绍了Verilog HDL语法，接下来介绍一下FPGA中分频器的设计，对于分频器这个概念应该不会太陌生，因为它应用于在数字电路系统的方方面面，例如在一个芯片中会有一个系统时钟，但它的外部模块之间的工作频率却各自不一样，这是我们就需要对系统时钟进行分频或倍频以达到我们预想的频率效果。　　在FPGA中，实现分频的主要有两种方式，使用计数器和调用FPGA厂">
+<meta name="keywords" content="FPGA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于FPGA分频器的设计">
+<meta property="og:url" content="http://teddyovo.tech/2017/06/06/FPGA_Frequency/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang 简介　　前几天总结介绍了Verilog HDL语法，接下来介绍一下FPGA中分频器的设计，对于分频器这个概念应该不会太陌生，因为它应用于在数字电路系统的方方面面，例如在一个芯片中会有一个系统时钟，但它的外部模块之间的工作频率却各自不一样，这是我们就需要对系统时钟进行分频或倍频以达到我们预想的频率效果。　　在FPGA中，实现分频的主要有两种方式，使用计数器和调用FPGA厂">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/5936629908065.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/05/59356f60b882f.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/59365c0f6aefb.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/59365bc43153a.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/5935f4716e766.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/59365a246b585.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/593622c9da978.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/593623ad5f276.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/593653bd7ad5b.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/59365593b0b12.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/593656dce8732.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/06/593657dae2189.jpg">
+<meta property="og:updated_time" content="2018-01-05T11:48:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于FPGA分频器的设计">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　前几天总结介绍了Verilog HDL语法，接下来介绍一下FPGA中分频器的设计，对于分频器这个概念应该不会太陌生，因为它应用于在数字电路系统的方方面面，例如在一个芯片中会有一个系统时钟，但它的外部模块之间的工作频率却各自不一样，这是我们就需要对系统时钟进行分频或倍频以达到我们预想的频率效果。　　在FPGA中，实现分频的主要有两种方式，使用计数器和调用FPGA厂">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/06/06/5936629908065.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2017/06/06/FPGA_Frequency/"/>
+
+
+
+
+
+  <title>基于FPGA分频器的设计 | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2017/06/06/FPGA_Frequency/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于FPGA分频器的设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-06T00:00:00+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HARDWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">HARDWARE_CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/06/FPGA_Frequency/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/06/06/FPGA_Frequency/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,616字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://ooo.0o0.ooo/2017/06/06/5936629908065.jpg" alt=""><br>　　前几天总结介绍了Verilog HDL语法，接下来介绍一下FPGA中分频器的设计，对于分频器这个概念应该不会太陌生，因为它应用于在数字电路系统的方方面面，例如在一个芯片中会有一个系统时钟，但它的外部模块之间的工作频率却各自不一样，这是我们就需要对系统时钟进行分频或倍频以达到我们预想的频率效果。<br>　　在FPGA中，实现分频的主要有两种方式，使用计数器和调用FPGA厂商的IP核（Intellectual Property/知识产权核）。本文会进行逐一介绍，然后会进行仿真介绍。好了，让我们一起学习使用FPGA进行分频器的设计。</p>
+<p>芯片型号：EP4CE6E22C8NG/ALTERA<br>开发环境：Quartus 13.0、Modelsim 10.1</p>
+<a id="more"></a>
+<h3 id="偶数分频器（计数器方式）"><a href="#偶数分频器（计数器方式）" class="headerlink" title="偶数分频器（计数器方式）"></a>偶数分频器（计数器方式）</h3><p>　　首先我们要清楚FPGA的系统时钟为50MHz，也就是说它的周期为20ps，这时它输出时钟信号的波形就是10ps高电平、10ps低电平（占空比为50%）的方波。那么，如果我们对这个时钟信号clk_in进行N（N为偶数）分频为clk_out，那么clk_out的周期就是clk_in的N倍，并且信号的取反时间为T(clk_in)*N/2。因为它的占空比为50%，这些都比较容易理解，在程序设计时，我们使用一个always语句块进行计数，设置一个变量cnt,注意从零开始，20ps后cnt加一，当cnt加至N/2-1时，使输出进行取反，这样就形成了输出N分频信号。<br>　　程序源码：<br><img src="https://ooo.0o0.ooo/2017/06/05/59356f60b882f.jpg" alt=""><br>　　程序中，定义N为4，也就是实现了4分频，cnt的值应该为0和1，那么接下来看看仿真结果，不得不说，Modelsim的仿真做的真是可以的。包括波形和参数都可以很直观的看出来。<br><img src="https://ooo.0o0.ooo/2017/06/06/59365c0f6aefb.jpg" alt=""><br>　　通过波形可以看出来输出时钟频率为12.5MHz，正好为系统时钟的4分频，然后这个程序使用二分频时，有一点很让人疑惑，当N为2时，cnt的值一直为0，那么他是怎么分频到25MHz呢？经过一番思考，这就是时序逻辑中使用非阻塞赋值的好处，在时序逻辑always语句块中，所有的赋值都是等待下一个时钟周期进行赋值，所以out_clk总是等待一个周期才会取反，所以它的周期为40ps，即25MHz。所以程序对于二分频也是适用的。<br><img src="https://ooo.0o0.ooo/2017/06/06/59365bc43153a.jpg" alt=""></p>
+<h3 id="可调占空比的分频器（计数器方式）"><a href="#可调占空比的分频器（计数器方式）" class="headerlink" title="可调占空比的分频器（计数器方式）"></a>可调占空比的分频器（计数器方式）</h3><p>　　上面我们使用计数器实现了N分频器，但是可以看到它的占空比都是50%，那么如果我们要使它的占空比不是50%，而是任意占空比呢？接下来我们实现一个<code>1/4占空比的十分频器，</code>即N为10。<br>　　思路也很简单，当计数到1/4*N后，进行反转，计数到N后，再次进行反转，接下来结合程序解释一下这个思路。当然，方法不唯一，我只是说其中一种方法。<br><img src="https://ooo.0o0.ooo/2017/06/06/5935f4716e766.jpg" alt=""><br>　　需要注意的是，当计数值满足N/4-1时，我们将输出信号反转，cnt要加一，如果不加一的话，这个if条件会一直满足，cnt的值就会停在这里，笔者也是通过波形调试得到这一点的。接下来看一下它的波形：<br><img src="https://ooo.0o0.ooo/2017/06/06/59365a246b585.jpg" alt=""></p>
+<p><code>注意：</code>因为计数器加一的时间为20ps，所以很显然，你不能使高电平时间低于20ps，所以4分频周期为80ps，你不能使占空比为1/8， 理解了么？</p>
+<h3 id="分频器（调用IP核方式）"><a href="#分频器（调用IP核方式）" class="headerlink" title="分频器（调用IP核方式）"></a>分频器（调用IP核方式）</h3><p>　　IP（知识产权）核是将一些应用在数字电路中常用的、但是比较复杂的功能块，如FIR滤波器、SDRAM控制器、PCI接口等设计成一些可修改参数的功能块。随着CPLD/FPGA的规模越来越大，设计也也来越复杂，设计者主要任务是在规定的时间内 完成复杂的设计。而调用IP核可以避免重复性劳动，大大减轻了工程师的负担。<br>　　IP核主要分成三种类型，软核、硬核和固核。<br>　　接下来我们就通过调用IP核，实现分频器的设计，这种操作十分简单，而且非常的准确，而且可以通过使用FPGA内部集成锁相环（如altera的PLL）进行分频、倍频和移相，PLL全称Phase Locked Loop，主要用于外部的输入信号与内部振荡信号的同步。好了，现在我们使用Quartus II开发软件调用Altera公司的PLL软核实现分频器的设计，步骤如下：<br>　　1、Tools——&gt;MegaWizard Plug-In Manager<br>　　2、选择左侧I/O——&gt;ALTPLL，注意芯片型号、编程语言、输出文件名称，如图所示：<br><img src="https://ooo.0o0.ooo/2017/06/06/593622c9da978.jpg" alt=""><br>　　3、然后修改输入时钟为50MHz，以正常模式运行<br><img src="https://ooo.0o0.ooo/2017/06/06/593623ad5f276.jpg" alt=""><br>　　4、然后一直next到如下界面，可以有两种配置频率的方式，一种直接填写输出频率，另一种通过倍频、分频计算输出频率，在该界面上还可调幅度和占空比。注意可以配置5个管脚的频率。<br><img src="https://ooo.0o0.ooo/2017/06/06/593653bd7ad5b.jpg" alt=""><br>　　５、然后一直next直到完成，我们会在左侧文件栏上找到my_pll.qip的文件包，在里面可以看到my_pll.v的Verilog HDL文件，打开如下图：<br><img src="https://ooo.0o0.ooo/2017/06/06/59365593b0b12.jpg" alt=""><br>　　6、这样我们就得到了分频时钟的模块，然后我们需要的就是将这个模块实例化，就可以产生我们所需要的时钟了， 是不是很简单？<br><img src="https://ooo.0o0.ooo/2017/06/06/593656dce8732.jpg" alt=""><br>　　7、输出时钟如下图：<br><img src="https://ooo.0o0.ooo/2017/06/06/593657dae2189.jpg" alt=""><br><code>注意：</code>pll产生的25MHz的时钟会有一段时间的不稳定区，就是仿真图的红线部分，所以Locked信号就是这个作用，为了判断pll的稳定性，然后再进行使用。<br>　　好了，这些分频器都非常简单、常用，还有奇数分频以及任意分频的计数器方式，等以后笔者遇到了会接着更新的。</p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据校内实习所讲，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FPGA/" rel="tag"><i class="fa fa-tag"></i> FPGA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/Verilog_Learning/" rel="next" title="Verilog HDL语法概述">
+                <i class="fa fa-chevron-left"></i> Verilog HDL语法概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/C++_This_Pointer/" rel="prev" title="C++类的特殊成员函数（构造函数、析构函数）">
+                C++类的特殊成员函数（构造函数、析构函数） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#偶数分频器（计数器方式）"><span class="nav-number">2.</span> <span class="nav-text">偶数分频器（计数器方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可调占空比的分频器（计数器方式）"><span class="nav-number">3.</span> <span class="nav-text">可调占空比的分频器（计数器方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分频器（调用IP核方式）"><span class="nav-number">4.</span> <span class="nav-text">分频器（调用IP核方式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">5.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

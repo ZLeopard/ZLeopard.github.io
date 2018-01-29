@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang 简介C++预定义表示对数据的运算：　　+,-,*,/,^,&amp;amp;,~,!,|,=,&amp;lt;&amp;lt;,&amp;gt;&amp;gt;,!=……只能用于基本数据类型：整型，实型，字符型，逻辑型…..　　但是在C++中要面对不同类型的数据，这时候就要使用运算符的重载功能，运算符重载就是使用函数重载的方法，已完成某种特定的操作。运算符重载实质是函数重载，在C++中每一个运算符都对应每一个">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运算符重载">
+<meta property="og:url" content="http://teddyovo.tech/2018/01/07/C++_operator_overloading/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang 简介C++预定义表示对数据的运算：　　+,-,*,/,^,&amp;amp;,~,!,|,=,&amp;lt;&amp;lt;,&amp;gt;&amp;gt;,!=……只能用于基本数据类型：整型，实型，字符型，逻辑型…..　　但是在C++中要面对不同类型的数据，这时候就要使用运算符的重载功能，运算符重载就是使用函数重载的方法，已完成某种特定的操作。运算符重载实质是函数重载，在C++中每一个运算符都对应每一个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+<meta property="og:image" content="https://i.loli.net/2018/01/09/5a54bcc288f06.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/01/09/5a54be59c3e0a.jpg">
+<meta property="og:updated_time" content="2018-01-10T11:29:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="运算符重载">
+<meta name="twitter:description" content="作者：TeddyZhang 简介C++预定义表示对数据的运算：　　+,-,*,/,^,&amp;amp;,~,!,|,=,&amp;lt;&amp;lt;,&amp;gt;&amp;gt;,!=……只能用于基本数据类型：整型，实型，字符型，逻辑型…..　　但是在C++中要面对不同类型的数据，这时候就要使用运算符的重载功能，运算符重载就是使用函数重载的方法，已完成某种特定的操作。运算符重载实质是函数重载，在C++中每一个运算符都对应每一个">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2018/01/07/C++_operator_overloading/"/>
+
+
+
+
+
+  <title>运算符重载 | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/01/07/C++_operator_overloading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">运算符重载</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-07T00:00:00+08:00">
+                2018-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOFTWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">SOFTWARE CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/01/07/C++_operator_overloading/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/07/C++_operator_overloading/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,515字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png" alt=""><br>C++预定义表示对数据的运算：<br>　　+,-,*,/,^,&amp;,~,!,|,=,&lt;&lt;,&gt;&gt;,!=……<br>只能用于基本数据类型：整型，实型，字符型，逻辑型…..<br>　　但是在C++中要面对不同类型的数据，这时候就要使用运算符的重载功能，运算符重载就是使用函数重载的方法，已完成某种特定的操作。运算符重载实质是函数重载，在C++中每一个运算符都对应每一个函数，比如表达式“a+b”在编译前被解释为：operator+(a,b)。所以可以看做是特殊的函数重载。</p>
+<a id="more"></a>
+<p>运算符函数的格式为：<br>　　&lt;返回类型说明符&gt; operator &lt;运算符符号&gt;(&lt;参数表&gt;)<br>　　{<br>    　　&lt;函数体&gt;<br>　　}<br>运算符函数被调用时分为显式调用和隐式调用两种方法。一般隐式更为简洁明了！</p>
+<h3 id="加、减运算符的重载"><a href="#加、减运算符的重载" class="headerlink" title="加、减运算符的重载"></a>加、减运算符的重载</h3><p><code>加减运算符的重载可以作为普通函数、成员函数、友元等方式进行重载。</code></p>
+<h4 id="加、减运算符作为普通函数进行重载"><a href="#加、减运算符作为普通函数进行重载" class="headerlink" title="加、减运算符作为普通函数进行重载"></a>加、减运算符作为普通函数进行重载</h4><p>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">double</span> m_real;</span><br><span class="line">    <span class="keyword">double</span> m_imag;</span><br><span class="line">    Complex(<span class="keyword">double</span> real , <span class="keyword">double</span> imag ):m_real(real), m_imag(imag)&#123;&#125;</span><br><span class="line">    ~Complex()&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_data</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; m_real &lt;&lt; <span class="string">"+j"</span> &lt;&lt; m_imag &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp;a, <span class="keyword">const</span> Complex &amp;b)&#123;</span><br><span class="line">    <span class="keyword">return</span> Complex(a.m_real+b.m_real, a.m_imag+b.m_imag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Complex <span class="keyword">operator</span>-(<span class="keyword">const</span> Complex &amp;a, <span class="keyword">const</span> Complex &amp;b)&#123;</span><br><span class="line">    <span class="keyword">return</span> Complex(a.m_real-b.m_real, a.m_imag-b.m_imag);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Complex a(1, 5), b(2, 6), c(0, 0);</span><br><span class="line">    c = a + b;</span><br><span class="line">    c.show_data();</span><br><span class="line">    c = a - b;</span><br><span class="line">    c.show_data();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="加、减运算符做成员函数重载"><a href="#加、减运算符做成员函数重载" class="headerlink" title="加、减运算符做成员函数重载"></a>加、减运算符做成员函数重载</h4><p>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">double</span> m_real;</span><br><span class="line">    <span class="keyword">double</span> m_imag;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Complex(<span class="keyword">double</span> real  , <span class="keyword">double</span> imag ):m_real(real), m_imag(imag)&#123;&#125;</span><br><span class="line">    ~Complex()&#123;&#125;</span><br><span class="line">    Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp;a);  <span class="comment">// 声明成员函数</span></span><br><span class="line">    Complex <span class="keyword">operator</span>-(<span class="keyword">const</span> Complex &amp;b);  <span class="comment">// 声明成员函数</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_data</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; m_real &lt;&lt; <span class="string">"+j"</span> &lt;&lt; m_imag &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Complex Complex::<span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp;a)&#123;  <span class="comment">// 成员在类外定义时，函数前一定要加类名！</span></span><br><span class="line">    <span class="keyword">return</span> Complex(m_real+a.m_real, m_imag+a.m_imag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Complex Complex::<span class="keyword">operator</span>-(<span class="keyword">const</span> Complex &amp;b)&#123;</span><br><span class="line">    <span class="keyword">return</span> Complex(m_real-b.m_real, m_imag-b.m_imag);  <span class="comment">// 返回类的对象。</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Complex a(1, 5), b(2, 6), c(0, 0);</span><br><span class="line">    c = a.<span class="keyword">operator</span>+(b);</span><br><span class="line">    c.show_data();</span><br><span class="line">    c = a.<span class="keyword">operator</span>-(b);</span><br><span class="line">    c.show_data();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>注意：</code>以上两种操作的不同之处在于当运算符函数为成员函数时，可以访问所作用对象的私有变量，且在类外定义时应注意加上类名。还有，这两种使用运算符函数所传递的参数个数也不同，成员函数一般是运算符变量个数减一。</p>
+<h4 id="加、减运算符重载为为友元"><a href="#加、减运算符重载为为友元" class="headerlink" title="加、减运算符重载为为友元"></a>加、减运算符重载为为友元</h4><p>　　如果有一种情况，需要运算符函数既保证为外部函数，又要保证可以访问私有变量。这是就需要将运算符函数重载为友元。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> m_real, m_imag;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Complex(<span class="keyword">double</span> real, <span class="keyword">double</span> imag):m_real(real), m_imag(imag)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_data</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="keyword">friend</span> Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp;p, <span class="keyword">double</span> r);  <span class="comment">// 声明为友元函数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Complex::show_data() &#123;   <span class="comment">// Complex类的成员函数，可以访问私人空间</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; m_real &lt;&lt; <span class="string">"+j"</span> &lt;&lt; m_imag &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Complex <span class="keyword">operator</span>+(<span class="keyword">const</span> Complex &amp;p, <span class="keyword">double</span> r) &#123;</span><br><span class="line">    <span class="keyword">return</span> Complex(p.m_real + r, p.m_imag);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Complex obj1(1, 2), obj2(0, 0);</span><br><span class="line">    obj2 = obj1 + <span class="number">5</span>;</span><br><span class="line">    obj2.show_data();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="赋值函数重载及浅赋值和深复制（重点）"><a href="#赋值函数重载及浅赋值和深复制（重点）" class="headerlink" title="赋值函数重载及浅赋值和深复制（重点）"></a>赋值函数重载及浅赋值和深复制（重点）</h3><p>　　当赋值运算符两边的类型不匹配时，需要对赋值运算符进行重载，如把一个int的对象赋值给一个Complex对象。注意的是，<code>赋值运算符&quot;=&quot;只能重载为成员函数。</code><br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span> *str;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    String():str(<span class="literal">NULL</span>)&#123;&#125;           <span class="comment">// 如果在main()中使用*p = a.c_str()编译器会报错，char* 和const char*不匹配</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">c_str</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> str;&#125; <span class="comment">// 返回值前加上const，使得用户不可以修改其指向的内容。</span></span><br><span class="line">    <span class="keyword">char</span> * <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *s);  <span class="comment">// 声明赋值运算符函数为成员函数</span></span><br><span class="line">    ~String();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * String::<span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *s)&#123;</span><br><span class="line">    <span class="keyword">if</span>(str) <span class="keyword">delete</span>[] str;</span><br><span class="line">    <span class="keyword">if</span>(s)&#123;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s)+<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(str, s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String::~String()&#123;</span><br><span class="line">    <span class="keyword">if</span>(str)</span><br><span class="line">       <span class="keyword">delete</span> [] str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String s1;</span><br><span class="line">    s1 = <span class="string">"Good Luck"</span>;</span><br><span class="line">    <span class="comment">// 如果改为String s1 = "Good Luck";的话，编译器会出错，这是定义语句，并不是赋值语句。</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1.c_str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    s1 = <span class="string">"Shenzhou 8"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1.c_str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对重载赋值运算符有了一定了解后，他们有何意义？浅复制和深复制<br>如果对以上的程序进一步深入分析，若声明String对象s1、s2，若直接进行s1 = s2；编译也不会报错，但是程序有可能会终止，这就是浅复制。接下来将深入分析他们的区别。<br>1、浅复制<br>　　一开始如图s1指向存有“this”的空间，s2指向存有“that”的空间，当s1 = s2;时，并不是进行一个字节一个字节的复制，而只是修改了s1的指向，与s2共同指向了存有“that”的内存。于是造成了原来s1指向的内存成为内存垃圾，同时若这两个同时消亡，则这片内存会被delete两次，这是所不能允许的，会造成程序崩溃。<br><img src="https://i.loli.net/2018/01/09/5a54bcc288f06.jpg" alt=""><br>2、深复制<br>　　经过上面的分析，我们要使赋值语句可以使s2指向的内容可以复制到s1所指向的内容，于是这样就不会出现上面的问题。所以我们要再次的重载赋值运算符，使之成为我们想要的形式。<br><img src="https://i.loli.net/2018/01/09/5a54be59c3e0a.jpg" alt=""><br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">String</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span> *str;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    String():str(<span class="literal">NULL</span>)&#123;&#125;           <span class="comment">// 如果在main()中使用*p = a.c_str()编译器会报错，char* 和const char*不匹配</span></span><br><span class="line">    <span class="function"><span class="keyword">const</span> <span class="keyword">char</span>* <span class="title">c_str</span><span class="params">()</span></span>&#123; <span class="keyword">return</span> str;&#125; <span class="comment">// 返回值前加上const，使得用户不可以修改其指向的内容。</span></span><br><span class="line">    <span class="keyword">char</span> * <span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *s);  <span class="comment">// 声明赋值运算符函数为成员函数</span></span><br><span class="line">    String &amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> String &amp; s);</span><br><span class="line">    ~String();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> * String::<span class="keyword">operator</span>=(<span class="keyword">const</span> <span class="keyword">char</span> *s)&#123;   <span class="comment">// 字符串赋值给对象</span></span><br><span class="line">    <span class="keyword">if</span>(str) <span class="keyword">delete</span>[] str;</span><br><span class="line">    <span class="keyword">if</span>(s)&#123;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s)+<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(str, s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String &amp; String::<span class="keyword">operator</span>=(<span class="keyword">const</span> String &amp; s)&#123;   <span class="comment">// 对象赋值给对象的重载赋值运算符</span></span><br><span class="line">    <span class="keyword">if</span>(str == s.str) <span class="keyword">return</span> *<span class="keyword">this</span>;   <span class="comment">// 要加上这句，否则当main中s = s,即本身赋值会出现错误</span></span><br><span class="line">    <span class="keyword">if</span>(str) <span class="keyword">delete</span> [] str;</span><br><span class="line">    <span class="keyword">if</span>(s.str)&#123;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">strlen</span>(s.str)+<span class="number">1</span>];</span><br><span class="line">        <span class="built_in">strcpy</span>(str, s.str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        str = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String::~String()&#123;</span><br><span class="line">    <span class="keyword">if</span>(str)</span><br><span class="line">       <span class="keyword">delete</span> [] str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String s1, s2;</span><br><span class="line">    s1 = <span class="string">"Good Luck"</span>;</span><br><span class="line">    s2 = <span class="string">"Shenzhou 8"</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1.c_str() &lt;&lt; <span class="string">","</span> &lt;&lt; s2.c_str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    s1 = s2;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; s1.c_str() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后进行一个小讨论，解决几个问题！！！<br>　1、赋值运算符函数 operator=返回值可不可以是void？<br>　　答：不可以，考虑一下a=b=c; 等价于 a.operator=(b.operator=(c));<br>　2、传递对象时使用String &amp;而不是String，为什么？<br>　　答：实现运算符重载时，应尽量保留运算符原来的风格。如(a=b)=c;等价于(a.operator=(b)).operator=(c);意味着b赋值给a，c也赋值给a。<br>　3、上面的string类就没有任何问题了？<br>　　答：当然不是，如果是进行String s2(s1);仍然会引起浅拷贝的问题，那么就需要在复制构造函数中重新编写深拷贝的代码，在String::String(String &amp;s)中进行编写。</p>
+<h3 id="自加、自减单目运算符的重载-区分前后置"><a href="#自加、自减单目运算符的重载-区分前后置" class="headerlink" title="自加、自减单目运算符的重载(区分前后置)"></a>自加、自减单目运算符的重载(区分前后置)</h3><p>　　在重载自加、自减运算符的时候，需要注意前置和后置的区别，并进行多个重载。但是直接使用运算符时只能使用一种重载方式，另一个需要使用运算符函数进行调用。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> x, y;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Point(<span class="keyword">int</span> t_x, <span class="keyword">int</span> t_y):x(t_x), y(t_y)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">show_data</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="string">"   "</span> &lt;&lt; y &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Point <span class="keyword">operator</span>++();</span><br><span class="line">    Point <span class="keyword">operator</span>--(<span class="keyword">int</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Point Point::<span class="keyword">operator</span>++() &#123;</span><br><span class="line">    ++x;</span><br><span class="line">    ++y;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Point Point::<span class="keyword">operator</span>--(<span class="keyword">int</span>) &#123;</span><br><span class="line">    --x;</span><br><span class="line">    --y;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Point <span class="title">obj1</span><span class="params">(<span class="number">3</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line">    ++obj1;</span><br><span class="line">    obj1.show_data();</span><br><span class="line">    obj1.<span class="keyword">operator</span>--(<span class="number">0</span>);</span><br><span class="line">    obj1.show_data();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="左移右移运算符的重载"><a href="#左移右移运算符的重载" class="headerlink" title="左移右移运算符的重载"></a>左移右移运算符的重载</h4><p>　　“&lt;&lt;”和”&gt;&gt;”原本为二进制的左移和右移，但是在C++中常常重载为流插入运算符(cout)和流提取运算符(cin)，那么我们首先确定cout &gt;&gt; 5 &gt;&gt; “this”;这条语句是如何进行的。”&gt;&gt;”是一个双目运算符，也就是说operator&gt;&gt;运算符函数中的参数是两个，由于cout是ostream对象，所以cout &gt;&gt; 5的返回值应该也是ostream对象，从而可以输出”this”。这就等价于<code>cout.operator&lt;&lt;(5).operator&lt;&lt;(&quot;this&quot;);</code><br>　　因此，对&lt;&lt;进行重载时，这样定义重载函数：ostream &amp;operator&lt;&lt;(ostream &amp;o, const CStudents &amp;s);<br>如果想要将一个对象当做整体输出，那就必须对左移运算符(&lt;&lt;)进行重载！<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Complex</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> m_real, m_imag;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Complex(<span class="keyword">double</span> real, <span class="keyword">double</span> imag):m_real(real), m_imag(imag)&#123;&#125;</span><br><span class="line">    <span class="keyword">friend</span> istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; is, Complex &amp; a);</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; is, <span class="keyword">const</span> Complex &amp; a);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ostream &amp; <span class="keyword">operator</span>&lt;&lt;(ostream &amp; os, <span class="keyword">const</span> Complex &amp; a)&#123;</span><br><span class="line">    os &lt;&lt; a.m_real &lt;&lt; <span class="string">"+"</span> &lt;&lt; a.m_imag &lt;&lt; <span class="string">"j"</span>;</span><br><span class="line">    <span class="keyword">return</span> os;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">istream &amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; is, Complex &amp; a)&#123;</span><br><span class="line">    <span class="built_in">string</span> str;</span><br><span class="line">    is &gt;&gt; str;</span><br><span class="line">    <span class="keyword">int</span> pos = str.find(<span class="string">"+"</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">string</span> sTmp = str.substr(<span class="number">0</span>, pos);   <span class="comment">// 找到+前的实部</span></span><br><span class="line">    a.m_real = atof(sTmp.c_str());      <span class="comment">// atof的功能是将char*的字符串传化为double型</span></span><br><span class="line">    sTmp = str.substr(pos+<span class="number">1</span>,str.length()-pos);</span><br><span class="line">    a.m_imag = atof(sTmp.c_str());</span><br><span class="line">    <span class="keyword">return</span> is;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function">Complex <span class="title">obj</span><span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; obj &gt;&gt; n;   <span class="comment">// 输入如a+bj形式的复数</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; obj &lt;&lt; <span class="string">","</span> &lt;&lt; n;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/01/07/C++_operator_overloading/">运算符重载</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
+  <p><span>发布时间:</span>2018年01月07日 - 00:01</p>
+  <p><span>最后更新:</span>2018年01月10日 - 19:01</p>
+  <p><span>原始链接:</span><a href="/2018/01/07/C++_operator_overloading/" title="运算符重载">http://teddyovo.tech/2018/01/07/C++_operator_overloading/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/01/07/C++_operator_overloading/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/06/C++_Friend/" rel="next" title="静态成员、常量成员函数、封闭类以及友元总结">
+                <i class="fa fa-chevron-left"></i> 静态成员、常量成员函数、封闭类以及友元总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/08/C++_Change_Array/" rel="prev" title="(实例)可变长数组的编写">
+                (实例)可变长数组的编写 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加、减运算符的重载"><span class="nav-number">2.</span> <span class="nav-text">加、减运算符的重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加、减运算符作为普通函数进行重载"><span class="nav-number">2.1.</span> <span class="nav-text">加、减运算符作为普通函数进行重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加、减运算符做成员函数重载"><span class="nav-number">2.2.</span> <span class="nav-text">加、减运算符做成员函数重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加、减运算符重载为为友元"><span class="nav-number">2.3.</span> <span class="nav-text">加、减运算符重载为为友元</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值函数重载及浅赋值和深复制（重点）"><span class="nav-number">3.</span> <span class="nav-text">赋值函数重载及浅赋值和深复制（重点）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自加、自减单目运算符的重载-区分前后置"><span class="nav-number">4.</span> <span class="nav-text">自加、自减单目运算符的重载(区分前后置)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#左移右移运算符的重载"><span class="nav-number">4.1.</span> <span class="nav-text">左移右移运算符的重载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">5.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

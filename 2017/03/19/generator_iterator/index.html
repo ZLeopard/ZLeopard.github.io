@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python3.5,黑科技," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang   本文简介本文主要对生成器和迭代器的概念和用法做一个较为清晰的解释，从而使得一些程序得以解释。比如for循环其实就是一个iterator，不断的执行next()函数，直到出现StopIteration异常就会终止。range()函数就相当于是一个生成器，自动生成一个列表，由于列表是可迭代对象，故可以与for语句进行使用。同样的，list/str/tuple/dict均">
+<meta name="keywords" content="Python3.5,黑科技">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3.5之生成器与迭代器">
+<meta property="og:url" content="http://teddyovo.tech/2017/03/19/generator_iterator/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang   本文简介本文主要对生成器和迭代器的概念和用法做一个较为清晰的解释，从而使得一些程序得以解释。比如for循环其实就是一个iterator，不断的执行next()函数，直到出现StopIteration异常就会终止。range()函数就相当于是一个生成器，自动生成一个列表，由于列表是可迭代对象，故可以与for语句进行使用。同样的，list/str/tuple/dict均">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-03-19T03:59:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3.5之生成器与迭代器">
+<meta name="twitter:description" content="作者：TeddyZhang   本文简介本文主要对生成器和迭代器的概念和用法做一个较为清晰的解释，从而使得一些程序得以解释。比如for循环其实就是一个iterator，不断的执行next()函数，直到出现StopIteration异常就会终止。range()函数就相当于是一个生成器，自动生成一个列表，由于列表是可迭代对象，故可以与for语句进行使用。同样的，list/str/tuple/dict均">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2017/03/19/generator_iterator/"/>
+
+
+
+
+
+  <title>Python3.5之生成器与迭代器 | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2017/03/19/generator_iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python3.5之生成器与迭代器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-19T00:00:00+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOFTWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">SOFTWARE CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/19/generator_iterator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/03/19/generator_iterator/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,136字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code>  </p>
+<h3 id="本文简介"><a href="#本文简介" class="headerlink" title="本文简介"></a>本文简介</h3><p>本文主要对生成器和迭代器的概念和用法做一个较为清晰的解释，从而使得一些程序得以解释。<br>比如for循环其实就是一个iterator，不断的执行next()函数，直到出现StopIteration异常就会终止。<br>range()函数就相当于是一个生成器，自动生成一个列表，由于列表是可迭代对象，故可以与for语句进行使用。<br>同样的，list/str/tuple/dict均为可迭代对象，与for语句进行配合使用。</p>
+<h3 id="生成器（Generator）"><a href="#生成器（Generator）" class="headerlink" title="生成器（Generator）"></a>生成器（Generator）</h3><p>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间就白白浪费了！<br>所以，我们需要一个边循环边计算的机制，成为生成器：generate  </p>
+<a id="more"></a>
+<h4 id="直接生成generator对象"><a href="#直接生成generator对象" class="headerlink" title="直接生成generator对象"></a>直接生成generator对象</h4><p>把一个<code>列表生成式</code>的[]改为()</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(5)]</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">[0, 1, 4, 9, 16]</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(5))</span><br><span class="line">&gt;&gt;&gt; g</span><br><span class="line">&lt;generator object &lt;genexpr&gt; at 0x034029F0&gt;</span><br></pre></td></tr></table></figure>
+<p>我们可以使用next()函数进行每个元素的打印，每调用一次next函数，就计算出下一个元素的值，直到最后一个，会抛出StopItration的错误。<br>但是常用的方法是使用for循环，因为generator也是可迭代对象(Iterable).</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = (x * x <span class="keyword">for</span> x <span class="keyword">in</span> range(5))</span><br><span class="line">&gt;&gt;&gt; <span class="keyword">for</span> n <span class="keyword">in</span> g:</span><br><span class="line">	<span class="built_in">print</span>(n)</span><br><span class="line">	</span><br><span class="line">0</span><br><span class="line">1</span><br><span class="line">4</span><br><span class="line">9</span><br><span class="line">16</span><br></pre></td></tr></table></figure>
+<h4 id="利用函数实现generator对象"><a href="#利用函数实现generator对象" class="headerlink" title="利用函数实现generator对象"></a>利用函数实现generator对象</h4><p><code>使用关键字yield</code><br>generator非常强大。如果推算的算法比较复杂，用类似列表生成式的for循环无法实现的时候，还可以用函数来实现。比如，著名的斐波拉契数列（Fibonacci），除第一个和地二个数列，任意一个数都可以由前两个数相加得到。<br>斐波拉契数列用列表生成式写不出来，但是，用函数把它打印出来却很容易：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        print(b)</span><br><span class="line">        a, b = b, a+b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> print(<span class="string">'done'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>要把fib函数变成generator，只需要把print(b)改成yield b就可以了：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">     n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">     <span class="keyword">while</span> n &lt; max:</span><br><span class="line">             <span class="keyword">yield</span> b</span><br><span class="line">             a, b = b, a+b</span><br><span class="line">             n = n+<span class="number">1</span></span><br><span class="line">     <span class="keyword">return</span> <span class="string">'done'</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = fib(<span class="number">6</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line">&lt;generator 0x7f87125309e8="" at="" fib="" object=""&gt;&lt;/generator&gt;</span><br></pre></td></tr></table></figure></p>
+<p>函数是顺序执行，遇到return语句或者最后一行函数语句就返回。<br>而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。<br>而在调用generator时，我们一般也不会next函数，而是直接使用for循环代替。<br><code>Python的for循环本质上就是通过不断调用next()函数实现的。</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;&gt; <span class="keyword">for</span> n <span class="keyword">in</span> fib(<span class="number">6</span>):</span><br><span class="line">         print(n)</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure></p>
+<p>要理解generator的工作原理，它是在for循环的过程中不断计算出下一个元素，并在适当的条件结束for循环。对于函数改成的generator来说，遇到return语句或者执行到函数体最后一行语句，就是结束generator的指令，for循环随之结束。</p>
+<h3 id="iter-函数"><a href="#iter-函数" class="headerlink" title="iter()函数"></a>iter()函数</h3><p>在Python 3中有关iter函数的用法主要有两种。<br>iter(object[, sentinel])</p>
+<h4 id="iter-object"><a href="#iter-object" class="headerlink" title="iter(object)"></a>iter(object)</h4><p>根据官方的解释，如果没有第二个参数，那么<code>object</code>必须是集合对象，而且需要提供(iteration protocal)迭代协议(<strong>iter</strong>())或者(sequence protocal)序列协议(<strong>getitem</strong>())。</p>
+<p>示例代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">lst = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> iter(lst):</span><br><span class="line">    print(i)</span><br><span class="line">dic = &#123;<span class="string">'three'</span>: <span class="number">3</span>, <span class="string">'two'</span>: <span class="number">2</span>, <span class="string">'one'</span>: <span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> iter(dic):   <span class="comment"># 字典的迭代器会遍历字典的键值</span></span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure></p>
+<h4 id="iter-object-sentinel"><a href="#iter-object-sentinel" class="headerlink" title="iter(object, sentinel)"></a>iter(object, sentinel)</h4><p>第二个参数sentinel出现时，参数object应是一个可调用对象(可通过callable函数检测)，定义了<strong>next</strong>()函数，当枚举到的值等于哨兵时，就会抛出异常StopIteration。</p>
+<p>示例代码：(多行命令输入)<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sentinel = <span class="string">'end'</span>  <span class="comment"># 遇到这个就结束</span></span><br><span class="line">lines = []</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> iter(input, sentinel):   <span class="comment"># 多行输入</span></span><br><span class="line">    lines.append(line)</span><br><span class="line">print(lines)</span><br></pre></td></tr></table></figure></p>
+<h3 id="可调用对象"><a href="#可调用对象" class="headerlink" title="可调用对象"></a>可调用对象</h3><p>在这里，input函数就为一个可调用对象，当input的返回值为sentinel时就会终止迭代。<br>需要注意的是，何为可调用对象？<br>我们可使用callable函数进行检测，比如函数，lambda函数式，类，以及实现了<strong>call</strong>方法的类示例，它均返回True.  </p>
+<p>lambda表达式是可调用的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; f=lambda x,y:x+y</span><br><span class="line">&gt;&gt;&gt; f(2,3)</span><br><span class="line">5</span><br><span class="line">&gt;&gt;&gt; callable(f)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>函数是可调用的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add(x,y):</span><br><span class="line">...     <span class="built_in">return</span> x+y</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; callable(add)</span><br><span class="line">True</span><br></pre></td></tr></table></figure></p>
+<p>而其他的，像整数、字符串、列表、元组、字典等等，都是不可调用，均为False.</p>
+<h3 id="可迭代对象-Iterable-与迭代器-Iterator"><a href="#可迭代对象-Iterable-与迭代器-Iterator" class="headerlink" title="可迭代对象(Iterable)与迭代器(Iterator)"></a>可迭代对象(Iterable)与迭代器(Iterator)</h3><p>迭代器用起来很灵巧，你可以迭代不是序列但表现处序列行为的对象，例如字典的键、一个文件的行，等等。当你使用循环迭代一个对象条目时，你几乎分辨不出它是迭代器还是序列。你不必去关注这些，因为python让它像一个序列那样操作。<br>迭代器的作用如下：  </p>
+<p>提供了刻扩展的迭代器接口；<br>对列表迭代带来了性能上的增强；<br>在字典迭代中性能提升；<br>创建真正的迭代接口，而不是原来的随即对象访问；<br>与所有已经存在的用户定义的类以及扩展得模拟序列和映射的对象向后兼容；<br>迭代非序列集合（例如映射和文件）时，可以创建更简洁可读的代码。  </p>
+<p>我们已经知道，可以直接作用于for循环的对象主要有以下几种：<br>1、集合数据类型：如list / tuple / dict / set / str /等;<br>2、generator，如生成器和带yield的generator function。 </p>
+<p>凡是可以作用于for循环的对象为可迭代对象（Iterable）<br>可以使用isinstance()判断一个object是否为Iterable对象：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterable</span><br><span class="line">&gt;&gt;&gt; isinstance([], Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(&#123;&#125;, Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(<span class="string">'abc'</span>, Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance((x <span class="keyword">for</span> x <span class="keyword">in</span> range(10)), Iterable)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance(100, Iterable)</span><br></pre></td></tr></table></figure></p>
+<p>凡是可以作用于next()函数的对象都是Iterator类型，它们表示一个惰性计算的序列;<br>可以使用isinstance()判断一个object是否为Iterator对象：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from collections import Iterator</span><br><span class="line">&gt;&gt;&gt; isinstance((x <span class="keyword">for</span> x <span class="keyword">in</span> range(10)),Iterator)</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; isinstance([],Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; isinstance(&#123;&#125;,Iterator)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; isinstance(<span class="string">'abc'</span>,Iterator)</span><br><span class="line">False</span><br></pre></td></tr></table></figure></p>
+<p>为什么list / dict / str 等数据类型不是Iterator ？  </p>
+<p>这是因为Python的Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看作是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。<br>Iterator甚至可以表示一个无限大的数据流，例如全体自然数。而使用list是永远不可能存储全体自然数的。<br><code>Python的for循环本质上就是通过不断调用next()函数实现的。</code></p>
+<h3 id="自定义Iterator类"><a href="#自定义Iterator类" class="headerlink" title="自定义Iterator类"></a>自定义Iterator类</h3><p>自己定义Iterator的类,本身也是Iterable<br>其实iter()函数是传递两个参数的功能而写，所以如果自己定义一个iterator类，需要使用<strong>next</strong>函数，这个函数每次返回一个值就可以实现迭代了。迭代器会先进行<strong>iter</strong>(),再进行<strong>next</strong>()<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Next</span><span class="params">(object)</span>:</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data = <span class="number">1</span>)</span>:</span>  </span><br><span class="line">        self.data = data  </span><br><span class="line">                 </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        <span class="keyword">return</span> self  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        print(<span class="string">"__next__ called"</span>)  </span><br><span class="line">        <span class="keyword">if</span> self.data &gt; <span class="number">5</span>:  </span><br><span class="line">            <span class="keyword">raise</span> StopIteration  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            self.data += <span class="number">1</span>  </span><br><span class="line">            <span class="keyword">return</span> self.data  </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> Next(<span class="number">3</span>):  </span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure></p>
+<p>注意<strong>next</strong>中必须有控制iterator的结束条件，不然会出现死循环。</p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>环境：Python3.5、Windows10</p>
+<p>此文为笔者本人所写，笔者不才，如果发现语句中有不对或者歧义的的地方欢迎在下面评论里提问，我会加以修正~~<br>Python代码笔者已经验证，均可行。若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python3-5/" rel="tag"><i class="fa fa-tag"></i> Python3.5</a>
+          
+            <a href="/tags/黑科技/" rel="tag"><i class="fa fa-tag"></i> 黑科技</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/12/Huawei_Test_12_16/" rel="next" title="华为机试题目(Part 3 Python3.5)">
+                <i class="fa fa-chevron-left"></i> 华为机试题目(Part 3 Python3.5)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/19/Huawei_Test_17_22/" rel="prev" title="华为机试题目(Part 4 Python3.5)">
+                华为机试题目(Part 4 Python3.5) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文简介"><span class="nav-number">1.</span> <span class="nav-text">本文简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器（Generator）"><span class="nav-number">2.</span> <span class="nav-text">生成器（Generator）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接生成generator对象"><span class="nav-number">2.1.</span> <span class="nav-text">直接生成generator对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用函数实现generator对象"><span class="nav-number">2.2.</span> <span class="nav-text">利用函数实现generator对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iter-函数"><span class="nav-number">3.</span> <span class="nav-text">iter()函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#iter-object"><span class="nav-number">3.1.</span> <span class="nav-text">iter(object)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iter-object-sentinel"><span class="nav-number">3.2.</span> <span class="nav-text">iter(object, sentinel)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可调用对象"><span class="nav-number">4.</span> <span class="nav-text">可调用对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可迭代对象-Iterable-与迭代器-Iterator"><span class="nav-number">5.</span> <span class="nav-text">可迭代对象(Iterable)与迭代器(Iterator)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Iterator类"><span class="nav-number">6.</span> <span class="nav-text">自定义Iterator类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">7.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

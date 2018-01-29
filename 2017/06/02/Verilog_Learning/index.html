@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FPGA,Verilog," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang 简介　　两周的FPGA培训到今天已经结束了，这两天自己也会整理一下所学的东西，虽然时间短暂，但是收获还是有的，主要学习使用了Quartus II这个软件，了解了FPGA芯片的工作机理，并使用Verilog HDL进行一些小项目的编写，第一次接触并行执行的芯片，感觉很棒，使用并行处理的话会使很多时序图的实现与模拟变得简单，记得之前使用51单片机去模拟IIC、SPI等总线，">
+<meta name="keywords" content="FPGA,Verilog">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Verilog HDL语法概述">
+<meta property="og:url" content="http://teddyovo.tech/2017/06/02/Verilog_Learning/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang 简介　　两周的FPGA培训到今天已经结束了，这两天自己也会整理一下所学的东西，虽然时间短暂，但是收获还是有的，主要学习使用了Quartus II这个软件，了解了FPGA芯片的工作机理，并使用Verilog HDL进行一些小项目的编写，第一次接触并行执行的芯片，感觉很棒，使用并行处理的话会使很多时序图的实现与模拟变得简单，记得之前使用51单片机去模拟IIC、SPI等总线，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/593214caa0fec.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/593206fe0c751.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/59320700a6e90.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/59320bff20361.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/59320deda0d35.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/03/59320dee928d3.jpg">
+<meta property="og:updated_time" content="2017-06-03T05:00:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Verilog HDL语法概述">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　两周的FPGA培训到今天已经结束了，这两天自己也会整理一下所学的东西，虽然时间短暂，但是收获还是有的，主要学习使用了Quartus II这个软件，了解了FPGA芯片的工作机理，并使用Verilog HDL进行一些小项目的编写，第一次接触并行执行的芯片，感觉很棒，使用并行处理的话会使很多时序图的实现与模拟变得简单，记得之前使用51单片机去模拟IIC、SPI等总线，">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/06/03/593214caa0fec.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2017/06/02/Verilog_Learning/"/>
+
+
+
+
+
+  <title>Verilog HDL语法概述 | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2017/06/02/Verilog_Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Verilog HDL语法概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-02T00:00:00+08:00">
+                2017-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HARDWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">HARDWARE_CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/02/Verilog_Learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/06/02/Verilog_Learning/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,887字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://ooo.0o0.ooo/2017/06/03/593214caa0fec.jpg" alt=""><br>　　两周的FPGA培训到今天已经结束了，这两天自己也会整理一下所学的东西，虽然时间短暂，但是收获还是有的，主要学习使用了Quartus II这个软件，了解了FPGA芯片的工作机理，并使用Verilog HDL进行一些小项目的编写，第一次接触并行执行的芯片，感觉很棒，使用并行处理的话会使很多时序图的实现与模拟变得简单，记得之前使用51单片机去模拟IIC、SPI等总线，感觉十分的麻烦，而且使用Quartus可以对程序的模块结构和信号进行仿真，这点我觉得非常得牛逼，这点以后我会讲到。<br>　　本文主要简单概述介绍一下Verilog HDL语言的语法和编写规范，参考夏宇闻教授编写的《Verilog经典教程》，本文只是针对常见语法的总结和概述，<br>不会太详细，但是重点都会涉及到。</p>
+<a id="more"></a>
+<h3 id="Verilog-HDL的由来"><a href="#Verilog-HDL的由来" class="headerlink" title="Verilog HDL的由来"></a>Verilog HDL的由来</h3><p>　　<code>硬件描述语言</code>（HDL，hardware description language）是一种形式化方法来描述数字电路和系统的语言。可以使用这种语言对要设计数字系统从上层到下层逐层描述自己的设计思想，从而表达极其复杂的数字系统。主要分为VHDL和Verilog HDL两种语言，VHDL是在1987年成为IEEE标准，为美国军方组织开发的。而Verilog HDL是从普通民间公司私有财产转化而来，于1995年才正式成为IEEE标准，因此更有生命力，在国内所占较大比重。</p>
+<h3 id="Verilog-HDL发展前景和优点"><a href="#Verilog-HDL发展前景和优点" class="headerlink" title="Verilog HDL发展前景和优点"></a>Verilog HDL发展前景和优点</h3><p>　　近二三年来，美国、日本、我国台湾地区电子设计界的情况已经清楚的表明，在高层次数字系统设计领域，Verilog已经占据压倒性优势，在国内，基于Verilog HDL开发的数字系统也逐年增加，所以它的前景是非常远大的。<br>　　传统的设计方法——通过原理图进行输入的方法，需要工程师对其线路和外围的元件特性了解的很清楚，具有设计周期长，需要手动布线的缺点，对于开发大型数字系统很困难。而采用Verilog HDL所完成的设计，可以很轻松的将完成的设计移植到不同厂家不同芯片中，由于其在程序中不用定义特定管脚，所以在不同规模的芯片均可以适用。而且其与工艺无关。这使得工程师在进行功能设计时，不用过多的考虑门级及工艺实现的具体细节，只需要利用系统设计时对芯片的要求，施加不同的约束条件，即可设计出实际电路。</p>
+<h3 id="Verilog-HDL模块"><a href="#Verilog-HDL模块" class="headerlink" title="Verilog HDL模块"></a>Verilog HDL模块</h3><p>　　Verilog的基本单元为<code>“模块”</code>(block)。一个模块由两部分组成的，一部分描述接口，另一部分描述接口，另一部分描述逻辑功能，即定义输入是如何影响输出的。<br>模块的端口声明了模块的输入输出口，格式为:<br>　　　module  模块名（口1，口2，口3 ……）<br>模块在被引用时用<code>“.”</code>符号，表明原模块是定义时规定的端口名，格式为:<br>　　　模块名（.端口1名（连接信号1名），.端口2名（连接信号2名）……）<br>模块的内容包括<code>I/O说明、内部信号声明和功能定义</code>。<br><strong>1、I/0说明</strong><br>　　　input   [信号位宽] 端口名<br>　　　output  [信号位宽] 端口名<br>　　　inout   [信号位宽] 端口名<br><strong> 2、内部信号声明</strong><br>　　　reg型和wire型:   reg　[信号位宽]　R变量1，R变量2…;<br>　　　　在<code>test bench</code>文件中常将输入定义为reg型，输出定义为wire型。<br><strong>3、功能定义</strong><br>　　　1、assign声明语句，定义变量<br>　　　2、always语句块<br>　　　　　always  @ (posedge clk or negedge rst_n)  产生异步时钟逻辑<br>　　　　　always  @ (*)   声明为组合逻辑<br>　　　　　always模块之间是并发执行的，而模块内部是顺序执行的，所以要使用begin—end语句使其进行顺序执行。</p>
+<h3 id="数据类型及常变量"><a href="#数据类型及常变量" class="headerlink" title="数据类型及常变量"></a>数据类型及常变量</h3><p><strong>1、4个基本数据类型</strong><br>　　　reg型、wire型、integer型和parameter型。</p>
+<p><strong>2、常量</strong><br>　　　1、整型常量有4种进制表示形式：<br>　　　　　　　二进制（b或B）、十进制（d或D）、十六进制（h或H）、八进制（o或O）。<br>　　　　　　　采用&lt;位宽&gt;&lt;进制&gt;&lt;数字&gt;的描述方式，如4‘b0110 //位宽为4的二进制表示，‘b表示二进制<br>　　　2、x值和z值，x代表不确定的值，z代表高阻值。<br>　　　　　　　如4’b100z  //表示位宽为4的二进制数，从低位起第1位为高阻值。<br>　　　3、负值，在位宽的前面加上负号即可，负号必在表达式的最前面。<br>　　　4、下划线（underscore_）,必须在数字之间，分割数据提高程序可读性。<br>　　　　　　　如400_0000表示4百万。<br>　　　5、parameter型定义符号常量，parameter  参数名1=表达式，参数名2=表达式，……;常用来定义时间或者变量宽度。<br><strong>3、变量</strong><br>　　　1、wire型表示用以assign关键字指定的组合逻辑信号。在Verilog HDL中默认输入输出为wire型，如果一次定义多个数据，数据名之间使用逗号隔开。<br>　　　　　wire  [3:0] b;    //定义了一个4位的wire型数据<br>　　　2、reg型常用来表示always模块内的指定信号，常代表触发器。指得注意得是，在always模块内被赋值的每一个信号都必须定义为reg型。Reg型数据的默认初始值是不定值。Reg型数据可以赋正值，也可以赋负值。<br>　　　　　reg   [3:0]a;    //定义了一个4位的reg型数据<br>　　　3、memory型是指Verilog HDL通过对reg型变量建立数组来对储存器建模，从而描述RAM储存器和ROM储存器，实质上就是通过扩展reg型数据的地址范围来生成的。<br>　　　　　例如reg[7:0]  mema[255:0];   //定义了一个名为mema的存储器，该储存器有256个8位的储存器。对其进行地址索引时必须是常数表达式。<br>　　　虽然reg型数据和memory型数据定义很相似，但需注意不同之处：<br>　　　　　如　reg [n-1:0] rega;  //一个n位的寄存器，可以在一条语句中赋值<br>　　　　　　　reg mema [n-1:0];   //一个由n个1位寄存器组成的寄存器组，不可以直接对mema进行赋值。</p>
+<h3 id="运算符及表达式"><a href="#运算符及表达式" class="headerlink" title="运算符及表达式"></a>运算符及表达式</h3><p>Verilog的运算符与C语言中的运算符大多数都差不多，这里就不再一一介绍，主要介绍一些较为独特的运算符。运算符整体如下图：<br><strong>1、算数运算符</strong><br>　　　如11%-3=2，结果取第一个操作数的符号。且若有x，结果必为x。<br><strong>2、逻辑运算符</strong><br>　　　^为按位异或（XOR）运算符，^~为按位同或运算符。<br><strong>3、==和===、!=和！==运算符的区别</strong><br>　　　当操作数中某些位可能为x和z时，===要求两个操作数必须完全一致，结果才唯一，常用于case表达式的判别，又称“case等式运算符”。<br><strong>4、位拼接运算符</strong><br>　　　在Verilog HDL中，有一个特殊的运算符，位拼接运算符（Concatation）{}。用于将一个或多个信号的某些位拼接起来进行运算操作。<br>　　　例如 {a, b[2:0], 2’b01}就相当于{a, b[2], b[1], b[0], 1b’0, 1b’1}<br>　　　　　{3{w}}相当于{w, w, w}<br>　　　　　{b,{3{a, b}}}相当于{b,a,b,a,b,a,b}<br><strong>5、缩减运算符</strong><br>　　　这个其实也很好理解，如<br>　　　　　reg [3:0] B; reg C;<br>　　　　　C = &B;   //相当于C = ((&amp;[0]&amp;B[1])&amp;B[2])&amp;B[3];</p>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p><img src="https://ooo.0o0.ooo/2017/06/03/593206fe0c751.jpg" alt=""></p>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p><img src="https://ooo.0o0.ooo/2017/06/03/59320700a6e90.jpg" alt=""><br>图中红笔画出的为笔者所见过常见的关键字~~</p>
+<h3 id="赋值语句和块语句"><a href="#赋值语句和块语句" class="headerlink" title="赋值语句和块语句"></a>赋值语句和块语句</h3><p><strong>1、非阻塞赋值（Non_Blocking）(如b &lt;= a;)</strong><br>　　在语句块中，非阻塞赋值不能立即被下面的语句所用，只有块语句结束后才可以完成这次赋值操作，常用于可综合的时序逻辑模块（如always @(posedge clk or negedge rst_n)）。如always模块内的reg型数据的赋值。<br><strong>2、阻塞赋值（Blocking）（如b=a;）</strong><br>　　赋值语句执行完立刻完成赋值，常用于组合逻辑中，在时序逻辑中使用会产生一定的问题。在时序逻辑中赋值是要根据时钟信号上升沿或下降沿去确定，例如触发器。<br><strong>3、块语句</strong><br>　　类似于C语言中的语句组的概念，将两条或多条语句组合到一起，使其在格式上更像一条语句。分为两种，一种是begin-end语句，另一种是fork-join语句。前者通常用来标识顺序执行的语句，称为顺序块，后者则是用来标识并行执行的语句，称为并行块。<br>　　笔者使用的都是begin-end方式的顺序块。还没有使用过fork-join语句。<br>　　块语句有以下特点：<br>　　　1、嵌套块<br>　　　　　块可以嵌套使用，顺序块和并行块能够混合在一起使用。<br>　　　2、命名块<br>　　　　　1、命名块中可以声明局部变量<br>　　　　　2、命名块中声明的变量可以通过层次名引用进行访问。<br>　　　　　3、命名块可以被禁止。使用disable关键字进行禁用命名块。</p>
+<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><p><strong>1、条件语句（if_else）</strong><br>　　太简单了，这里就不废话了，跟Ｃ语言的方法作用一致。<br><strong>2、case语句</strong><br>　　用来直接处理多分支选择，通常用于微处理器的指令译码。形式为：<br>　　　　case(表达式)   <case分支项>   endcase<br>　　　　casez(表达式)   <case分支项>   endcase<br>　　　　casex(表达式)   <case分支项>   endcase<br>　　　　case分支语句格式为：<br>　　　　　　分支表达式 ：  语句；<br>　　　　　　default   :   语句；<br>　　　　Endcase<br>注：<code>case语句中所有表达式的位宽必须相同</code>，只有这样控制表达式和分支表达式对应位的值才可以进行相应的比较。<br>　　Verilog HDL针对电路的特性提供了case语句的其他两种形式，即casez和casex，用来处理过程中不必考虑的情况，casez在进行比较时不必考虑高阻值z，而casex在比较时将高阻值z和不定值x都视为不必关心的情况。<br><strong>3、循环语句</strong><br>　　<code>forever语句、repeat语句、while语句、for语句</code>4种类型的循环语句。<br>　　while语句与for语句和C语言类似，在这里就不在赘述，主要说明一下forever语句和repeat语句。<br>　　1、forever语句<br>　　　　格式：forever  语句； 或者  forever  begin 多条语句 end;<br>　　　　forever循环语句常用于产生周期性的波形，用来进行仿真测试，与always语句不同的是其不能独立写在程序中，而必须写在initial块中。<br>　　2、repeat语句<br>　　　　格式：repeat  语句； 或者  repeat  begin 多条语句 end;<br>　　　　在repeat语句中，其表达式通常为常量表达式。</case分支项></case分支项></case分支项></p>
+<h3 id="结构说明语句"><a href="#结构说明语句" class="headerlink" title="结构说明语句"></a>结构说明语句</h3><p>　　Verilog HDL语言中任何过程模块都从属于以下4种结构语句，<br><code>Initial说明语句、always说明语句、task说明语句和function说明语句。</code><br>一个模块中可以有多个initial语句和always语句，它们在仿真一开始就立即同时执行，只不过，initial语句只执行一次，always语句是重复不断地执行，直至仿真结束，在一个模块中，两者的使用是不受限制的。<br>一个模块中的多个initial块，它们都是并行进行的。Initial块常用于测试文件和虚拟模块的编写，用来产生仿真测试信号和设置信号记录等仿真环境。<br>always语句具有重复性，需要结合一定的时序控制在一起才有用，如果没有时序控制，则该语句可能会使仿真器发生死锁。always语句的声明格式：<br>　　　　always &lt;时序控制&gt;  &lt;语句&gt;<br>　　　　如： always @ (posedge clk or negedge rst_n)<br>接下来重点说一下task和function语句。<br>它们分别用于定义任务和函数。其区别主要有：<br>　　1、函数只能与主模块共用一个仿真时间，但任务可以自己进行定义。<br>　　2、函数不能启动任务，而任务可以启动其他任务和函数。<br>　　3、函数至少要有一个输入变量，但任务可以没有或有多个任何类型的变量。<br>　　4、函数返回一个值，而任务不返回值。<br>声明格式:<br><img src="https://ooo.0o0.ooo/2017/06/03/59320bff20361.jpg" alt=""></p>
+<h3 id="常用的系统任务"><a href="#常用的系统任务" class="headerlink" title="常用的系统任务"></a>常用的系统任务</h3><p><strong>1、\$display和\$write任务</strong><br>　　这两个系统任务主要用于输出调试信息，与C语言中的printf很类似。这两个系统任务的区别是，\$display每运行一次就会进行换行，而\$write不会进行换行。<br>　　输出格式：<br><img src="https://ooo.0o0.ooo/2017/06/03/59320deda0d35.jpg" alt=""><br><strong>2、\$fopen、\$fclose和\$fdisplay</strong><br>　　Verilog HDL的结果通常输出到文件verilog.log中，可以使用上述系统任务将其定向到其他文件。<br>　　任务\$fopen返回一个多通道描述符，可以同时打开多个文件。另外两个分别用于文件关闭和文件写入。<br><strong>3、\$monitor、\$monitoron和\$monitoroff</strong><br>　　格式为：\$monitor(\$time，，“rxd=%d txd=%d”,rxd,txd)<br>　　其他两个用于打开和关闭系统任务\$monitor，在多模块调试时，如果许多模块都调用了\$monitor时，我们就需要这三者的配合来实时的输出每个信号的值。<br><strong>4、\$time和\$realtime</strong><br>　　\$time可以返回一个64位的整数表示当前仿真时间，但是该时刻以时间尺度作为基准的。时间尺度是指在仿真时（`timescale 10ns/1ns），这时的时间尺度为10ns。<br>　　<code>注意:$time通常是取整数的。</code><br>　　而\$realtime是将仿真时刻按照时间尺度变换后直接进行输出的，不经过取整操作。这点和$time不同。<br><strong>5、\$finish和\$stop</strong><br>　　前者的作用是退出仿真器，返回主操作系统，也就是仿真结束。可以带参数0、1和2，不同参数输出的信息量不同。后者的作用是把仿真器置成暂停模式，把控制权交给用户，使得用户仿真时便于观察结果。<br><strong>6、\$random</strong><br>　　产生随机的数据段，当被调用时返回一个32位的随机数，注意，它是一个带符号的整型数。</p>
+<h3 id="编译预处理"><a href="#编译预处理" class="headerlink" title="编译预处理"></a>编译预处理</h3><p><strong>1、`define</strong><br>　　格式：`define 标识符（宏名） 字符串（宏内容）<br>　　这与C语言中的#define类似，所以不再赘述。只是使用时，必须在宏名的前面加上“`”。这样才可以完成引用。<br><strong>2、`include</strong><br>　　这与C语言中的#include类似，功能也是一样的，不再赘述。<br><strong>3、`timescale</strong><br>　　这个命令在仿真时用来说明模块的时间单位和精度。使用这个命令可以在同一个设计中包含不同的时间单位的模块。也可以说明仿真时间的基准。<br>　　格式：`timescale <code>&lt;时间单位&gt;/&lt;时间精度&gt;</code><br>　　注意：时间精度不能大于时间单位值，且用于说明的时间单位和时间精度数字必须是整数，有效数值为1，10，100。<br>　　时间单位：<br><img src="https://ooo.0o0.ooo/2017/06/03/59320dee928d3.jpg" alt=""><br><strong>4、`ifdef、`else和`endif</strong><br>　　这几个命令主要用于条件编译，也和C语言中的条件编译类似，故不再赘述。</p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　再次声明，本文只是对Verilog HDL语法的一个概述，也是笔者读夏宇闻教授《Verilog HDL经典教程》的一些小总结！！！<br>注：笔者文笔不行，难免会有瑕疵，望各位原谅，并希望对笔者加以指正。<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FPGA/" rel="tag"><i class="fa fa-tag"></i> FPGA</a>
+          
+            <a href="/tags/Verilog/" rel="tag"><i class="fa fa-tag"></i> Verilog</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/22/HuffmanEncoding/" rel="next" title="哈夫曼(Huffman)编码（Python 3.6）">
+                <i class="fa fa-chevron-left"></i> 哈夫曼(Huffman)编码（Python 3.6）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/06/FPGA_Frequency/" rel="prev" title="基于FPGA分频器的设计">
+                基于FPGA分频器的设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verilog-HDL的由来"><span class="nav-number">2.</span> <span class="nav-text">Verilog HDL的由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verilog-HDL发展前景和优点"><span class="nav-number">3.</span> <span class="nav-text">Verilog HDL发展前景和优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verilog-HDL模块"><span class="nav-number">4.</span> <span class="nav-text">Verilog HDL模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型及常变量"><span class="nav-number">5.</span> <span class="nav-text">数据类型及常变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符及表达式"><span class="nav-number">6.</span> <span class="nav-text">运算符及表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级"><span class="nav-number">7.</span> <span class="nav-text">优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字"><span class="nav-number">8.</span> <span class="nav-text">关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值语句和块语句"><span class="nav-number">9.</span> <span class="nav-text">赋值语句和块语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制语句"><span class="nav-number">10.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构说明语句"><span class="nav-number">11.</span> <span class="nav-text">结构说明语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的系统任务"><span class="nav-number">12.</span> <span class="nav-text">常用的系统任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译预处理"><span class="nav-number">13.</span> <span class="nav-text">编译预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">14.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

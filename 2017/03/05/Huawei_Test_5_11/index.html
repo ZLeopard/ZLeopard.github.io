@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="华为机试," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang    华为机试简介本篇文章为华为机试–第二弹，共6各小题。由于笔者为考研党，平时过于忙碌，被考研数学给虐的脑子痛，只能利用微乎其微的闲暇时间去刷机试题，不过我会坚持下去的！！！还有，我真的很想吐槽考研数学，敢不敢少些套路？选择了，就坚持下去吧！博客中题目来自于牛客网（专业IT笔试面试备考平台）在线编程之：华为机试在线训练(6-11题)。ps: 前面的例子比较简单，没有涉">
+<meta name="keywords" content="华为机试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为机试题目(Part 2 Python3.5)">
+<meta property="og:url" content="http://teddyovo.tech/2017/03/05/Huawei_Test_5_11/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang    华为机试简介本篇文章为华为机试–第二弹，共6各小题。由于笔者为考研党，平时过于忙碌，被考研数学给虐的脑子痛，只能利用微乎其微的闲暇时间去刷机试题，不过我会坚持下去的！！！还有，我真的很想吐槽考研数学，敢不敢少些套路？选择了，就坚持下去吧！博客中题目来自于牛客网（专业IT笔试面试备考平台）在线编程之：华为机试在线训练(6-11题)。ps: 前面的例子比较简单，没有涉">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/03/02/58b818816d648.jpg">
+<meta property="og:updated_time" content="2017-03-05T12:56:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="华为机试题目(Part 2 Python3.5)">
+<meta name="twitter:description" content="作者：TeddyZhang    华为机试简介本篇文章为华为机试–第二弹，共6各小题。由于笔者为考研党，平时过于忙碌，被考研数学给虐的脑子痛，只能利用微乎其微的闲暇时间去刷机试题，不过我会坚持下去的！！！还有，我真的很想吐槽考研数学，敢不敢少些套路？选择了，就坚持下去吧！博客中题目来自于牛客网（专业IT笔试面试备考平台）在线编程之：华为机试在线训练(6-11题)。ps: 前面的例子比较简单，没有涉">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/03/02/58b818816d648.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2017/03/05/Huawei_Test_5_11/"/>
+
+
+
+
+
+  <title>华为机试题目(Part 2 Python3.5) | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2017/03/05/Huawei_Test_5_11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">华为机试题目(Part 2 Python3.5)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-05T00:00:00+08:00">
+                2017-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HUAWEI-TEST/" itemprop="url" rel="index">
+                    <span itemprop="name">HUAWEI TEST</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/05/Huawei_Test_5_11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2017/03/05/Huawei_Test_5_11/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,281字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code>  </p>
+<p><img src="https://ooo.0o0.ooo/2017/03/02/58b818816d648.jpg" alt=""></p>
+<h3 id="华为机试简介"><a href="#华为机试简介" class="headerlink" title="华为机试简介"></a>华为机试简介</h3><p>本篇文章为华为机试–第二弹，共6各小题。<br>由于笔者为考研党，平时过于忙碌，被考研数学给虐的脑子痛，只能利用微乎其微的闲暇时间去刷机试题，不过我会坚持下去的！！！<br>还有，我真的很想吐槽考研数学，敢不敢少些套路？<br>选择了，就坚持下去吧！<br>博客中题目来自于牛客网（专业IT笔试面试备考平台）在线编程之：华为机试在线训练(6-11题)。<br>ps: 前面的例子比较简单，没有涉及数据结构，只是基础应用。  </p>
+<p><code>人生苦短，我用Python</code></p>
+<a id="more"></a>
+<h3 id="题目一：质数因子"><a href="#题目一：质数因子" class="headerlink" title="题目一：质数因子"></a>题目一：质数因子</h3><p>函数接口说明：<br>public String getResult(long ulDataInput)<br>输入参数：<br>long ulDataInput：输入的正整数<br>返回值：<br>String  </p>
+<p>输入描述:<br>输入一个long型整数<br>输出描述:<br>按照从小到大的顺序输出它的所有质数的因子，以空格隔开。最后一个数后面也要有空格。  </p>
+<p>输入例子:<br>180<br>输出例子:<br>2 2 3 3 5</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">String_GetResult</span><span class="params">(ulDataInput)</span>:</span></span><br><span class="line">    list0 = []</span><br><span class="line">    <span class="keyword">while</span> ulDataInput != <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, ulDataInput+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ulDataInput % i == <span class="number">0</span>:</span><br><span class="line">                list0.append(str(i) + <span class="string">' '</span>)</span><br><span class="line">                ulDataInput //= i      <span class="comment"># //为整数除</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    print(list0)</span><br><span class="line">    list0.sort()</span><br><span class="line">    string = <span class="string">""</span>.join(list0)</span><br><span class="line">    <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line">input_s = input(<span class="string">"Please input a long interage."</span>)</span><br><span class="line">string = String_GetResult(int(input_s))</span><br><span class="line">print(string)</span><br></pre></td></tr></table></figure>
+<h3 id="题目二：取近似值"><a href="#题目二：取近似值" class="headerlink" title="题目二：取近似值"></a>题目二：取近似值</h3><p>写出一个程序，接受一个正浮点数值，输出该数值的近似整数值。如果小数点后数值大于等于5,向上取整；小于5，则向下取整。  </p>
+<p>输入描述:<br>输入一个正浮点数值<br>输出描述:<br>输出该数值的近似整数值  </p>
+<p>输入例子:<br>5.5<br>输出例子:<br>6  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">float_num = input(<span class="string">"Please input a float style number."</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    temp = int(float_num)   <span class="comment"># 判断键入值</span></span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    print(<span class="string">"the number you input is incorrect!!!"</span>)</span><br><span class="line">    exit(<span class="number">0</span>)    <span class="comment"># 结束本进程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> float_num &gt;= int(float_num) + <span class="number">0.5</span>:</span><br><span class="line">    print(int(float_num) + <span class="number">1</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(int(float_num))</span><br></pre></td></tr></table></figure>
+<h3 id="题目三：合并表记录"><a href="#题目三：合并表记录" class="headerlink" title="题目三：合并表记录"></a>题目三：合并表记录</h3><p>数据表记录包含表索引和数值，请对表索引相同的记录进行合并，即将相同索引的数值进行求和运算，输出按照key值升序进行输出。  </p>
+<p>输入描述:<br>先输入键值对的个数<br>然后输入成对的index和value值，以空格隔开<br>输出描述:<br>输出合并后的键值对（多行）  </p>
+<p>输入例子:<br>4<br>0 1<br>0 2<br>1 2<br>3 4<br>输出例子:<br>0 3<br>1 2<br>3 4  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">key_value = []</span><br><span class="line">dict_value = &#123;&#125;</span><br><span class="line"></span><br><span class="line">index_num = input(<span class="string">"Please input the table's number."</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(int(index_num)):</span><br><span class="line">    key_value = input(<span class="string">"Please input a couple of key_value."</span>).split(<span class="string">" "</span>)</span><br><span class="line">    <span class="keyword">if</span> int(key_value[<span class="number">0</span>]) <span class="keyword">not</span> <span class="keyword">in</span> dict_value:   <span class="comment"># 判断键值</span></span><br><span class="line">        dict_value[int(key_value[<span class="number">0</span>])] = int(key_value[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        dict_value[int(key_value[<span class="number">0</span>])] += int(key_value[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> sorted(dict_value.keys()):  <span class="comment"># 将键值按升序排列</span></span><br><span class="line">    print(str(key) + <span class="string">' '</span> + str(dict_value[key]))</span><br></pre></td></tr></table></figure>
+<h3 id="题目四：提取不重复的整数"><a href="#题目四：提取不重复的整数" class="headerlink" title="题目四：提取不重复的整数"></a>题目四：提取不重复的整数</h3><p>输入一个int型整数，按照从右向左的阅读顺序，返回一个不含重复数字的新的整数。  </p>
+<p>输入描述:<br>输入一个int型整数<br>输出描述:<br>按照从右向左的阅读顺序，返回一个不含重复数字的新的整数  </p>
+<p>输入例子:<br>9876673<br>输出例子:<br>37689  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">integer_num = input(<span class="string">"Please input a long style integer."</span>)</span><br><span class="line"></span><br><span class="line">out_list = []</span><br><span class="line"></span><br><span class="line">length = len(integer_num)</span><br><span class="line">integer_num = int(integer_num)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">    num = integer_num % <span class="number">10</span></span><br><span class="line">    <span class="keyword">if</span> str(num) <span class="keyword">not</span> <span class="keyword">in</span> out_list:</span><br><span class="line">        out_list.append(str(num))</span><br><span class="line"></span><br><span class="line">    integer_num //= <span class="number">10</span></span><br><span class="line"></span><br><span class="line">print(out_list)</span><br><span class="line">string = <span class="string">""</span>.join(out_list)</span><br><span class="line">print(string)</span><br></pre></td></tr></table></figure>
+<h3 id="题目五：字符个数统计"><a href="#题目五：字符个数统计" class="headerlink" title="题目五：字符个数统计"></a>题目五：字符个数统计</h3><p>编写一个函数，计算字符串中含有的不同字符的个数。字符在ACSII码范围内(0~127)。不在范围内的不作统计。  </p>
+<p>输入描述:<br>输入N个字符，字符在ACSII码范围内。<br>输出描述:<br>输出范围在(0~127)字符的个数。  </p>
+<p>输入例子:<br>abc<br>输出例子:<br>3  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ascii_code = input(<span class="string">"Please input some arcii codes."</span>)</span><br><span class="line"></span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(ascii_code)):</span><br><span class="line">    <span class="keyword">if</span> ord(ascii_code[i]) &lt;= <span class="number">127</span>:</span><br><span class="line">        num += <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">print(num)</span><br></pre></td></tr></table></figure>
+<h3 id="题目六：句子反序"><a href="#题目六：句子反序" class="headerlink" title="题目六：句子反序"></a>题目六：句子反序</h3><p>将一个英文语句以单词为单位逆序排放。例如“I am a boy”，逆序排放后为“boy a am I”<br>所有单词之间用一个空格隔开，语句中除了英文字母外，不再包含其他字符  </p>
+<p>输入描述:<br>将一个英文语句以单词为单位逆序排放。<br>输出描述:<br>得到逆序的句子  </p>
+<p>输入例子:<br>I am a boy<br>输出例子:<br>boy a am I  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">String_reverse</span><span class="params">(sentence)</span>:</span></span><br><span class="line">    sen_list = sentence.split(<span class="string">" "</span>)</span><br><span class="line">    reversed_list = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(sen_list)):</span><br><span class="line">        reversed_list.append(sen_list[len(sen_list) - i - <span class="number">1</span>] + <span class="string">' '</span>)</span><br><span class="line"></span><br><span class="line">    reversed_string = <span class="string">""</span>.join(reversed_list)  <span class="comment"># 按字符串形式输出</span></span><br><span class="line">    <span class="keyword">return</span> reversed_string</span><br><span class="line"></span><br><span class="line">sentence = input(<span class="string">"Please input a sentence with spaces."</span>)</span><br><span class="line">string = String_reverse(sentence)</span><br><span class="line">print(string)</span><br></pre></td></tr></table></figure>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>环境：Python3.5、Windows10</p>
+<p>注：代码为笔者所写，难免会有瑕疵，望各位原谅。<br>此文为笔者本人所写，笔者不才，如果发现语句中有不对或者歧义的的地方欢迎在下面评论里提问，我会加以修正~~<br>Python代码笔者已经验证，均可行。若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/华为机试/" rel="tag"><i class="fa fa-tag"></i> 华为机试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/02/Huawei_Test_1_5/" rel="next" title="华为机试题目(Part 1 Python3.5)">
+                <i class="fa fa-chevron-left"></i> 华为机试题目(Part 1 Python3.5)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/12/Huawei_Test_12_16/" rel="prev" title="华为机试题目(Part 3 Python3.5)">
+                华为机试题目(Part 3 Python3.5) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#华为机试简介"><span class="nav-number">1.</span> <span class="nav-text">华为机试简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目一：质数因子"><span class="nav-number">2.</span> <span class="nav-text">题目一：质数因子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目二：取近似值"><span class="nav-number">3.</span> <span class="nav-text">题目二：取近似值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目三：合并表记录"><span class="nav-number">4.</span> <span class="nav-text">题目三：合并表记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目四：提取不重复的整数"><span class="nav-number">5.</span> <span class="nav-text">题目四：提取不重复的整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目五：字符个数统计"><span class="nav-number">6.</span> <span class="nav-text">题目五：字符个数统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目六：句子反序"><span class="nav-number">7.</span> <span class="nav-text">题目六：句子反序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">8.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
