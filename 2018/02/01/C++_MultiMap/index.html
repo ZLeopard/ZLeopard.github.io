@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的MAP容器的使用方法和概念。　　当学到这个映射时，让我不禁想到了Python中的字典类型，两者有很多大的相似之处，在Python中非常的简便，不用指定数据类型，只通过符号来进行识别，这也是Python为什么这么火的原因，但是效率却一定会下降，鱼和熊掌不可兼得！">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL库之map和multimap容器(映射和多重映射)">
+<meta property="og:url" content="http://teddyovo.tech/2018/02/01/C++_MultiMap/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的MAP容器的使用方法和概念。　　当学到这个映射时，让我不禁想到了Python中的字典类型，两者有很多大的相似之处，在Python中非常的简便，不用指定数据类型，只通过符号来进行识别，这也是Python为什么这么火的原因，但是效率却一定会下降，鱼和熊掌不可兼得！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+<meta property="og:image" content="https://i.loli.net/2018/02/06/5a7982290a063.png">
+<meta property="og:updated_time" content="2018-02-06T12:21:34.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL库之map和multimap容器(映射和多重映射)">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的MAP容器的使用方法和概念。　　当学到这个映射时，让我不禁想到了Python中的字典类型，两者有很多大的相似之处，在Python中非常的简便，不用指定数据类型，只通过符号来进行识别，这也是Python为什么这么火的原因，但是效率却一定会下降，鱼和熊掌不可兼得！">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2018/02/01/C++_MultiMap/"/>
+
+
+
+
+
+  <title>STL库之map和multimap容器(映射和多重映射) | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/02/01/C++_MultiMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">STL库之map和multimap容器(映射和多重映射)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T00:00:00+08:00">
+                2018-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOFTWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">SOFTWARE CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/01/C++_MultiMap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/01/C++_MultiMap/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,470字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png" alt=""><br>　　本文主要讲述C++中STL库中的MAP容器的使用方法和概念。<br>　　当学到这个映射时，让我不禁想到了Python中的字典类型，两者有很多大的相似之处，在Python中非常的简便，不用指定数据类型，只通过符号来进行识别，这也是Python为什么这么火的原因，但是效率却一定会下降，鱼和熊掌不可兼得！</p>
+<a id="more"></a>
+<h3 id="MULTIMAP"><a href="#MULTIMAP" class="headerlink" title="MULTIMAP"></a>MULTIMAP</h3><p>multimap为多重映射，而且multimap中的元素由&lt;关键字，值&gt;组成，每一个元素都是一个pair对象，关键字就是pair对象的first成员变量，其类型是Key。使用时需添加头文件<map>。<br>multimap源代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Key, <span class="keyword">typename</span> _Tp,</span><br><span class="line">      <span class="keyword">typename</span> _Compare = <span class="built_in">std</span>::less&lt;_Key&gt;,</span><br><span class="line">      <span class="keyword">typename</span> _Alloc = <span class="built_in">std</span>::allocator&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> _Key, _Tp&gt; &gt; &gt;</span><br><span class="line">class <span class="built_in">multimap</span>&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">typedef</span> pair&lt;<span class="keyword">const</span> _Key, _Tp&gt; value_type;</span><br><span class="line">    ......</span><br><span class="line">&#125;;   <span class="comment">// _Key 代表关键字的数据类型</span></span><br></pre></td></tr></table></figure></map></p>
+<p>由源码可知，multimap有四个参数，前两个为一个pair对象，关键字是first成员变量，类型为_Key，而值为second成员变量，类型为_Tp。在multimap中，允许有多个相同的关键字存在，元素按照first成员变量从小到大排列，缺省情况下用less<key>定义”&lt;”的关系。</key></p>
+<h4 id="应用小例子"><a href="#应用小例子" class="headerlink" title="应用小例子"></a>应用小例子</h4><p>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">multimap</span>&lt; <span class="keyword">int</span>, <span class="keyword">double</span>, less&lt;<span class="keyword">int</span>&gt; &gt; mmid;</span><br><span class="line">    mmid pairs;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"1. "</span> &lt;&lt; pairs.count(<span class="number">15</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    pairs.insert(mmid::value_type(<span class="number">15</span>, <span class="number">2.7</span>));  <span class="comment">// 源码中定义typedef pair&lt;const _Key, _Tp&gt; value_type;要加上作用域说明符</span></span><br><span class="line">    pairs.insert(pair&lt;<span class="keyword">int</span>, <span class="keyword">double</span> &gt;(<span class="number">15</span>, <span class="number">99.3</span>));   <span class="comment">// 直接使用pair模板, 上面的属于临时对象</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"2. "</span> &lt;&lt; pairs.count(<span class="number">15</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    pairs.insert(mmid::value_type(<span class="number">30</span>, <span class="number">111.11</span>));</span><br><span class="line">    pairs.insert(mmid::value_type(<span class="number">10</span>, <span class="number">22.22</span>));</span><br><span class="line">    pairs.insert(mmid::value_type(<span class="number">25</span>, <span class="number">33.333</span>));</span><br><span class="line">    pairs.insert(mmid::value_type(<span class="number">20</span>, <span class="number">9.3</span>));</span><br><span class="line">    <span class="keyword">for</span>(mmid::const_iterator i = pairs.begin();i != pairs.end();i ++)&#123;     <span class="comment">// pairs.begin()返回的是迭代器(const_iterator)，实质为指针</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; i-&gt;first &lt;&lt; <span class="string">","</span> &lt;&lt; i-&gt;second &lt;&lt; <span class="string">")"</span> &lt;&lt; <span class="string">","</span>;         <span class="comment">// 由于i是一个迭代器类型，即T *类型，实质是一个指针，故访问成员变量时不可以用"."运算符</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="一个小实例"><a href="#一个小实例" class="headerlink" title="一个小实例"></a>一个小实例</h3><p><img src="https://i.loli.net/2018/02/06/5a7982290a063.png" alt=""></p>
+<p>例题代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CStudent</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CInfo</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> id;</span><br><span class="line">        <span class="built_in">string</span> name;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">int</span> score;</span><br><span class="line">    CInfo info;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multimap</span>&lt;<span class="keyword">int</span>, CStudent::CInfo&gt; MAP_STD;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    MAP_STD mp;</span><br><span class="line">    CStudent st;</span><br><span class="line">    <span class="built_in">string</span> cmd;</span><br><span class="line">    MAP_STD::iterator maxp;</span><br><span class="line">    <span class="keyword">int</span> maxId;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; cmd)&#123;</span><br><span class="line">        <span class="keyword">if</span>(cmd == <span class="string">"Add"</span>) &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; st.info.name &gt;&gt; st.info.id &gt;&gt; st.score;</span><br><span class="line">            mp.insert(pair&lt;<span class="keyword">int</span>, CStudent::CInfo&gt;(st.score, st.info)); <span class="comment">// 也可以使用MAP_STD::value_type</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(cmd == <span class="string">"Query"</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> score;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; score;</span><br><span class="line">            MAP_STD::iterator p = mp.lower_bound(score);</span><br><span class="line">            <span class="keyword">if</span>(p != mp.begin())&#123;</span><br><span class="line">                -- p;</span><br><span class="line">                score = p-&gt;first;  <span class="comment">// 选择比要查询分数低的最高分</span></span><br><span class="line">                maxp = p;</span><br><span class="line">                maxId = p-&gt;second.id;  <span class="comment">// p是找到的对象的指针</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span>(;p != mp.begin() &amp;&amp; (p-&gt;first == score);-- p)&#123;</span><br><span class="line">                <span class="comment">// 遍历比p低的所有元素寻找成绩相同的，跳出条件为成绩不等或者队列遍历完了</span></span><br><span class="line">                <span class="keyword">if</span>(p-&gt;second.id &gt; maxId)&#123;</span><br><span class="line">                    maxp = p;</span><br><span class="line">                    maxId = p-&gt;second.id;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;first == score)&#123;</span><br><span class="line">                <span class="comment">// 如果上面的循环因为p == mp.begin()终止，需要处理p</span></span><br><span class="line">                <span class="keyword">if</span>(p-&gt;first == score)&#123;</span><br><span class="line">                    maxp = p;</span><br><span class="line">                    maxId = p-&gt;second.id;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; maxp-&gt;second.name &lt;&lt; <span class="string">" "</span> &lt;&lt; maxp-&gt;second.id &lt;&lt; <span class="string">" "</span> &lt;&lt; maxp-&gt;first &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="comment">// lower_bound的结果就是begin，说明你的分数最低</span></span><br><span class="line">             <span class="built_in">cout</span> &lt;&lt; <span class="string">"You are the lowest!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　这段代码主要用于进一步了解迭代器在C++中的应用，一定要理解迭代器的实质是一个指针，他有数据类型，所以当其指向类或者结构体时，常常用指针运算符，而不用点运算符！一定要深刻理解。。。</p>
+<h3 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h3><p>map的源码为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Key, <span class="keyword">typename</span> _Tp, <span class="keyword">typename</span> _Compare = <span class="built_in">std</span>::less&lt;_Key&gt;,</span><br><span class="line">            <span class="keyword">typename</span> _Alloc = <span class="built_in">std</span>::allocator&lt;<span class="built_in">std</span>::pair&lt;<span class="keyword">const</span> _Key, _Tp&gt; &gt; &gt;</span><br><span class="line">class <span class="built_in">map</span>&#123;</span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">typedef</span> pair&lt;<span class="keyword">const</span> Key, T&gt; value_type;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　由源码可以得出，map中的元素都是pair模板类对象，关键字(first成员变量)各不相同，元素按照关键字从小到大排列，缺省情况下用less<key>。<br><code>map和multimap之间更重要的区别是map中有[]的成员函数！！！</code><br>　　若pairs为map模板类的对象，那么pairs[key]返回对关键字等于key的元素的值(second成员变量)的引用。若没有关键字为key的元素，则会往pairs里插入一个关键字为key的元素，其值用无参构造函数初始化，并返回其值的引用。<br>　　比如：<code>map&lt;int, double&gt; pairs; 则pairs[50] = 5;会修改pairs中关键字为50的元素，使其值变成5。若不存在关键字为50的元素，则插入此元素，并使其值为5。</code><br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Key</span>, <span class="title">class</span> <span class="title">Value</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">ostream</span> &amp; <span class="title">operator</span>&lt;&lt; (ostream &amp; o, const pair&lt;Key, Value&gt; p)&#123;</span></span><br><span class="line"><span class="class">    o &lt;&lt; "(" &lt;&lt; p.first &lt;&lt; "," &lt;&lt; p.second &lt;&lt; ")";</span></span><br><span class="line"><span class="class">    return o;</span></span><br><span class="line"><span class="class">&#125;;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">int main()&#123;</span></span><br><span class="line"><span class="class">    typedef map&lt; int, double, less&lt;int&gt; &gt; mmid;  // 重命名map类型</span></span><br><span class="line"><span class="class">    mmid pairs;</span></span><br><span class="line"><span class="class">    cout &lt;&lt; "1." &lt;&lt; pairs.count(15) &lt;&lt; endl;</span></span><br><span class="line"><span class="class">    pairs.insert(mmid::value_type(15, 2.7));</span></span><br><span class="line"><span class="class">    pairs.insert(make_pair(15, 99.3)); // 生成一个pair对象</span></span><br><span class="line"><span class="class">    cout &lt;&lt; "2." &lt;&lt; pairs.count(15) &lt;&lt; endl;</span></span><br><span class="line"><span class="class">    pairs.insert(pair&lt;int, double&gt;(20, 9.3));</span></span><br><span class="line"><span class="class">    mmid::iterator i;</span></span><br><span class="line"><span class="class">    cout &lt;&lt; "3.";</span></span><br><span class="line"><span class="class">    for(i = pairs.begin();i != pairs.end();i ++)&#123;</span></span><br><span class="line"><span class="class">        cout &lt;&lt; *i &lt;&lt; ",";   // 重载&lt;&lt;输出pair模板类对象</span></span><br><span class="line"><span class="class">    &#125;</span></span><br><span class="line"><span class="class">    cout &lt;&lt; endl;</span></span><br><span class="line"><span class="class">    cout &lt;&lt; "4.";</span></span><br><span class="line"><span class="class">    int n = pairs[40];   // 如果map中没有关键字40，那么就自动生成一个并插入。</span></span><br><span class="line"><span class="class">    for(i = pairs.begin();i != pairs.end();i ++)&#123;</span></span><br><span class="line"><span class="class">        cout &lt;&lt; *i &lt;&lt; ",";</span></span><br><span class="line"><span class="class">    &#125;</span></span><br><span class="line"><span class="class">    cout &lt;&lt; endl;</span></span><br><span class="line"><span class="class">    pairs[15] = 6.28;     // 如果有关键字，那么就将关键字元素值改为6.28，则插入一个</span></span><br><span class="line"><span class="class">    cout &lt;&lt; "5.";</span></span><br><span class="line"><span class="class">    for(i = pairs.begin();i != pairs.end();i ++)&#123;</span></span><br><span class="line"><span class="class">        cout &lt;&lt; *i &lt;&lt; ",";</span></span><br><span class="line"><span class="class">    &#125;</span></span><br><span class="line"><span class="class">&#125;</span></span><br></pre></td></tr></table></figure></key></p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/02/01/C++_MultiMap/">STL库之map和multimap容器(映射和多重映射)</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
+  <p><span>发布时间:</span>2018年02月01日 - 00:02</p>
+  <p><span>最后更新:</span>2018年02月06日 - 20:02</p>
+  <p><span>原始链接:</span><a href="/2018/02/01/C++_MultiMap/" title="STL库之map和multimap容器(映射和多重映射)">http://teddyovo.tech/2018/02/01/C++_MultiMap/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/02/01/C++_MultiMap/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/29/Blog_Update/" rel="next" title="熬夜更新Blog">
+                <i class="fa fa-chevron-left"></i> 熬夜更新Blog
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/02/C++_MultiSet/" rel="prev" title="STL库之set和multiset容器(集合和多重集合)">
+                STL库之set和multiset容器(集合和多重集合) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MULTIMAP"><span class="nav-number">2.</span> <span class="nav-text">MULTIMAP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用小例子"><span class="nav-number">2.1.</span> <span class="nav-text">应用小例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个小实例"><span class="nav-number">3.</span> <span class="nav-text">一个小实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAP"><span class="nav-number">4.</span> <span class="nav-text">MAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">5.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共54.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

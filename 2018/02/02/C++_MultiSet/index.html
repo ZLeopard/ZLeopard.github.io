@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的关联容器的特性，在进行使用时，关联容器会自动对元素按照一定的规则进行排序。然后介绍了关联容器中常用的成员函数和容器构成，以及STL库中set(集合)和multiset(多重集合)的应用。　　multiset和set的根本区别是multiset可以允许相同元素的存在，而set不允许！">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL库之set和multiset容器(集合和多重集合)">
+<meta property="og:url" content="http://teddyovo.tech/2018/02/02/C++_MultiSet/index.html">
+<meta property="og:site_name" content="Teddy&#39;s Blog">
+<meta property="og:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的关联容器的特性，在进行使用时，关联容器会自动对元素按照一定的规则进行排序。然后介绍了关联容器中常用的成员函数和容器构成，以及STL库中set(集合)和multiset(多重集合)的应用。　　multiset和set的根本区别是multiset可以允许相同元素的存在，而set不允许！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+<meta property="og:updated_time" content="2018-02-06T12:25:51.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL库之set和multiset容器(集合和多重集合)">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的关联容器的特性，在进行使用时，关联容器会自动对元素按照一定的规则进行排序。然后介绍了关联容器中常用的成员函数和容器构成，以及STL库中set(集合)和multiset(多重集合)的应用。　　multiset和set的根本区别是multiset可以允许相同元素的存在，而set不允许！">
+<meta name="twitter:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://teddyovo.tech/2018/02/02/C++_MultiSet/"/>
+
+
+
+
+
+  <title>STL库之set和multiset容器(集合和多重集合) | Teddy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/ZLeopard"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Teddy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">越努力，越幸运</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/02/02/C++_MultiSet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeddyZhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Teddy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">STL库之set和multiset容器(集合和多重集合)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T00:00:00+08:00">
+                2018-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SOFTWARE-CODING/" itemprop="url" rel="index">
+                    <span itemprop="name">SOFTWARE CODING</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/02/C++_MultiSet/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/02/C++_MultiSet/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,643字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>作者：TeddyZhang</code></p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png" alt=""><br>　　本文主要讲述C++中STL库中的关联容器的特性，在进行使用时，关联容器会自动对元素按照一定的规则进行排序。然后介绍了关联容器中常用的成员函数和容器构成，以及STL库中set(集合)和multiset(多重集合)的应用。<br>　　multiset和set的根本区别是multiset可以允许相同元素的存在，而set不允许！</p>
+<a id="more"></a>
+<h3 id="关联容器"><a href="#关联容器" class="headerlink" title="关联容器"></a>关联容器</h3><p>在STL库中，关联容器有set/multiset(集合、多重集合)，map/multimap(映射、多重映射)。<br>内部元素有序排列，新元素插入的位置取决于它的值，查找速度快。除了各容器都支持的函数外，还支持以下成员函数：<br>　　find: 查找等于某个值的元素(x小于y和y小于x同时不成立即为相等)<br>　　lower_bound: 查找某个下界<br>　　upper_bound: 查找某个上界<br>　　equal_range: 同时查找上下界<br>　　count: 计算等于某个元素的个数(x小于y和y小于x同时不成立即为相等)<br>　　insert: 用以插入一个元素或一个区间</p>
+<h3 id="预备知识：pair模板"><a href="#预备知识：pair模板" class="headerlink" title="预备知识：pair模板"></a>预备知识：pair模板</h3><p>pair模板源码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _T1, <span class="keyword">typename</span> _T2&gt;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">pair</span></span></span><br><span class="line"><span class="class">  &#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> _T1 first_type;    <span class="comment">/// @c first_type is the first bound type</span></span><br><span class="line">    <span class="keyword">typedef</span> _T2 second_type;   <span class="comment">/// @c second_type is the second bound type</span></span><br><span class="line"></span><br><span class="line">    _T1 first;                 <span class="comment">/// @c first is a copy of the first object</span></span><br><span class="line">    _T2 second;                <span class="comment">/// @c second is a copy of the second object</span></span><br><span class="line">    pair() : first(), second() &#123; &#125;</span><br><span class="line">    pair(<span class="keyword">const</span> _T1&amp; __a, <span class="keyword">const</span> _T2&amp; __b) : first(__a), second(__b) &#123; &#125;</span><br><span class="line">    &lt;_U1, _U2&gt;</span><br><span class="line">    pair(<span class="keyword">const</span> pair&lt;_U1, _U2&gt;&amp; __p)</span><br><span class="line">      : first(__p.first), second(__p.second) &#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　由源码可知，pair模板的初始化可以有三种情况，且map/multimap容器中放着的都是pair模板类的对象，且按first从小到大排序。</p>
+<h3 id="multiset"><a href="#multiset" class="headerlink" title="multiset"></a>multiset</h3><p>　　multiset为多重集合，使用时应添加头文件<set>。</set></p>
+<h4 id="multiset源码分析"><a href="#multiset源码分析" class="headerlink" title="multiset源码分析"></a>multiset源码分析</h4><p>multiset源代码为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Key, <span class="keyword">typename</span> _Compare = <span class="built_in">std</span>::less&lt;_Key&gt;,</span><br><span class="line">        <span class="keyword">typename</span> _Alloc = <span class="built_in">std</span>::allocator&lt;_Key&gt; &gt;</span><br><span class="line">class <span class="built_in">multiset</span>&#123; ... &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>　　其中Pred类型的变量决定了multiset中的元素，也就是决定了”一个比另一个小”怎么定义的。在运行过程中，会生成一个Pred类型的变量，假定为op，若表达式op(x, y)返回值为true，则x比y小，即x排在y的前面。<br><code>而Pred的缺省值是less&lt;Key&gt;</code><br>less模板源代码为：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// One of the @link comparison_functors comparison functors@endlink.</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">less</span> :</span> <span class="keyword">public</span> binary_function&lt;_Tp, _Tp, <span class="keyword">bool</span>&gt;</span><br><span class="line">  &#123;</span><br><span class="line">    _GLIBCXX14_CONSTEXPR</span><br><span class="line">    <span class="keyword">bool</span></span><br><span class="line">    <span class="keyword">operator</span>()(<span class="keyword">const</span> _Tp&amp; __x, <span class="keyword">const</span> _Tp&amp; __y) <span class="keyword">const</span></span><br><span class="line">    &#123; <span class="keyword">return</span> __x &lt; __y; &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>由源码可知，less模板是靠”&lt;”工作的。</p>
+<h4 id="multiset成员函数"><a href="#multiset成员函数" class="headerlink" title="multiset成员函数"></a>multiset成员函数</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">mltiset成员函数</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">iterator find(const T &amp; val);</td>
+<td style="text-align:center">在容器中查找值为val的元素，返回其迭代器。如果找不到，返回end() </td>
+</tr>
+<tr>
+<td style="text-align:left">iterator insert(const T &amp; val);</td>
+<td style="text-align:center">将val插入到容器中并返回其迭代器 </td>
+</tr>
+<tr>
+<td style="text-align:left">void insert(iterator first, iterator last);</td>
+<td style="text-align:center">将区间[first, last)插入到容器 </td>
+</tr>
+<tr>
+<td style="text-align:left">int count(const T &amp; val);</td>
+<td style="text-align:center">统计有多少个元素的值和val相等 </td>
+</tr>
+<tr>
+<td style="text-align:left">iterator lower_bound(const T &amp; val);</td>
+<td style="text-align:center">查找一个最大位置的it，使得[begin(), it)中所有元素都比val小 </td>
+</tr>
+<tr>
+<td style="text-align:left">iterator upper_bound(const T &amp; val);</td>
+<td style="text-align:center">查找一个最小位置的it，使得[it, end())中所有元素都比val大</td>
+</tr>
+<tr>
+<td style="text-align:left">pair<iterator, iterator=""> equal_range(const T &amp; val);</iterator,></td>
+<td style="text-align:center">同时求得lower_bound和upper_bound </td>
+</tr>
+<tr>
+<td style="text-align:left">iterator erase(iterator it);</td>
+<td style="text-align:center">删除it指向的元素，返回其后面的元素的迭代器（VS2010是如此，而Dev C++却不是） </td>
+</tr>
+</tbody>
+</table>
+<p>示例代码1(运行错误)：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">multiset</span>&lt;A&gt; a;</span><br><span class="line">    a.insert(A());</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　这段代码会出错，而编译器会提示”error: no match for ‘operator&lt;’ (operand types are ‘const A’ and ‘const A’) { return <strong>x &lt; </strong>y; }”，这是因为multiset在实例化时，参数Pred会默认为less模板，而less模板中有两个元素比较大小的关系，但A为class，不可以直接使用运算符”&lt;”运算，必须对其进行运算符重载。<br>示例代码2(运行正常)：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Print</span>(<span class="title">T</span> <span class="title">first</span>, <span class="title">T</span> <span class="title">last</span>)&#123;</span>   <span class="comment">// fist, last为迭代器类型</span></span><br><span class="line">    <span class="keyword">for</span>(;first != last;first ++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; * first &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(<span class="keyword">int</span> _n) : n(_n) &#123;&#125;;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">bool</span> <span class="keyword">operator</span>&lt; (<span class="keyword">const</span> A &amp; a1, <span class="keyword">const</span> A &amp; a2)&#123;</span><br><span class="line">        <span class="keyword">return</span> (a1.n &lt; a2.n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">friend</span> ostream &amp; <span class="keyword">operator</span>&lt;&lt; (ostream &amp; o, <span class="keyword">const</span> A &amp; a2)&#123;   <span class="comment">// 定义为友元成员函数可以访问私有变量</span></span><br><span class="line">        o &lt;&lt; a2.n;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">friend</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLess</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLess</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:                 <span class="comment">// 一定要记得定义为共有，否则默认私有，不可访问</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span> <span class="params">(<span class="keyword">const</span> A &amp; a1, <span class="keyword">const</span> A &amp; a2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (a1.n % <span class="number">10</span>) &lt; (a2.n % <span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multiset</span>&lt;A&gt; MSET1;   <span class="comment">// 使用默认的Less模板</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multiset</span>&lt;A, MyLess&gt; MSET2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> SIZE = <span class="number">6</span>;</span><br><span class="line">    A a[] = &#123;<span class="number">4</span>, <span class="number">22</span>, <span class="number">19</span>, <span class="number">8</span>, <span class="number">33</span>, <span class="number">40</span>&#125;;</span><br><span class="line">    MSET1 m1;</span><br><span class="line">    m1.insert(a, a + SIZE);</span><br><span class="line">    m1.insert(<span class="number">22</span>);    <span class="comment">// 由于multiset为有序容器，故插入后会进行自动排序！</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"1. "</span> &lt;&lt; m1.count(<span class="number">22</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"2. "</span>; Print(m1.begin(), m1.end());</span><br><span class="line">    MSET1::iterator pp = m1.find(<span class="number">19</span>);   <span class="comment">// 找不到会返回m1.end()</span></span><br><span class="line">    <span class="keyword">if</span>(pp != m1.end())&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"found"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;                                <span class="comment">// 由于lower_bound 和 upper_bound都返回迭代器，故取值时加*</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"3. "</span> &lt;&lt; *m1.lower_bound(<span class="number">22</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *m1.upper_bound(<span class="number">22</span>) &lt;&lt;<span class="built_in">endl</span>;   <span class="comment">// 输出 22 33</span></span><br><span class="line">    pp = m1.erase(m1.lower_bound(<span class="number">22</span>), m1.upper_bound(<span class="number">22</span>));   <span class="comment">// 删除区间[22, 33) 注意不包括33，返回下一个元素</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"4. "</span>; Print(m1.begin(), m1.end());</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"5. "</span> &lt;&lt; * pp &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    MSET2 m2;</span><br><span class="line">    m2.insert(a, a + SIZE);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"6. "</span>; Print(m2.begin(), m2.end());  <span class="comment">// 按照MyLess的规则进行排序~~</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><p>set与multiset最大的区别就是有无重复元素，set中不允许有重复元素的存在。<br>set源代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Key</span>, <span class="title">class</span> <span class="title">Pred</span> = <span class="title">less</span>&lt;Key&gt;, <span class="title">class</span> <span class="title">A</span>  = <span class="title">allocator</span>&lt;Key&gt;&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">set</span>&#123;</span> ... &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>其初始化与multiset类似，只是在插入set中已有的元素时，会忽略插入。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator IT;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>&#125;;</span><br><span class="line">    <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st(a, a + <span class="number">5</span>);</span><br><span class="line">    pair&lt;IT, <span class="keyword">bool</span>&gt; result;</span><br><span class="line">    result = st.insert(<span class="number">5</span>);   <span class="comment">// st变为1 2 3 4 5 6  inset函数返回值为std::pair&lt;iterator, bool&gt;, 其中插入成功与否存入pair的second元素中</span></span><br><span class="line">    <span class="keyword">if</span>(result.second)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; * result.first &lt;&lt; <span class="string">" inserted"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">if</span>(st.insert(<span class="number">5</span>).second)   <span class="comment">// 这是第二次插入5的时候~~</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; * result.first &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; * result.first &lt;&lt; <span class="string">" already exists"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    pair&lt;IT, IT&gt; bounds = st.equal_range(<span class="number">4</span>);   <span class="comment">// 同时查找上下界 返回std::pair&lt;iterator, iterator&gt;用于保存上下界</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; *bounds.first &lt;&lt; <span class="string">" "</span> &lt;&lt; *bounds.second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+    
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    
+    </div>
+    
+    <div>
+    
+       
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/02/02/C++_MultiSet/">STL库之set和multiset容器(集合和多重集合)</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
+  <p><span>发布时间:</span>2018年02月02日 - 00:02</p>
+  <p><span>最后更新:</span>2018年02月06日 - 20:02</p>
+  <p><span>原始链接:</span><a href="/2018/02/02/C++_MultiSet/" title="STL库之set和multiset容器(集合和多重集合)">http://teddyovo.tech/2018/02/02/C++_MultiSet/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/02/02/C++_MultiSet/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+    
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原文创作，您的鼓励是我继续创作的最大支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2018/01/04/5a4d9eb77916c.png" alt="TeddyZhang 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2018/01/04/5a4d9ee760573.jpg" alt="TeddyZhang 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/01/C++_MultiMap/" rel="next" title="STL库之map和multimap容器(映射和多重映射)">
+                <i class="fa fa-chevron-left"></i> STL库之map和multimap容器(映射和多重映射)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="TeddyZhang" />
+            
+              <p class="site-author-name" itemprop="name">TeddyZhang</p>
+              <p class="site-description motion-element" itemprop="description">爱生活，爱奋斗</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ZLeopard" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/ZLeopard001" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/1925656693/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/7372802/teddy-z-p-j" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ted.com/" title="TED" target="_blank">TED</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ookamiantd.top" title="ookamiantd's blog" target="_blank">ookamiantd's blog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://fanzhenyu.me/" title="line's blog" target="_blank">line's blog</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=448226072&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联容器"><span class="nav-number">2.</span> <span class="nav-text">关联容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预备知识：pair模板"><span class="nav-number">3.</span> <span class="nav-text">预备知识：pair模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multiset"><span class="nav-number">4.</span> <span class="nav-text">multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#multiset源码分析"><span class="nav-number">4.1.</span> <span class="nav-text">multiset源码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#multiset成员函数"><span class="nav-number">4.2.</span> <span class="nav-text">multiset成员函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set"><span class="nav-number">5.</span> <span class="nav-text">set</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">6.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeddyZhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共54.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'ZLeopard',
+            repo: 'ZLeopard.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'd801b49944c294382424511d7fc8a10be054ef57',
+            
+                client_id: '2f6a9da2d282c0379858'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
