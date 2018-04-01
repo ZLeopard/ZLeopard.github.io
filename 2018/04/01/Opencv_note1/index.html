@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://i.loli.net/2018/04/01/5ac0d176479df.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/01/5ac0d1986e896.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/01/5ac0d15fc0136.png">
-<meta property="og:updated_time" content="2018-04-01T12:50:46.777Z">
+<meta property="og:updated_time" content="2018-04-01T13:03:37.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenCV小试牛刀">
 <meta name="twitter:description" content="作者：TeddyZhang 简介　　今天把基于VS2017的opencv和C++的开发环境整理好了，由于在实际应用中需要用到opencv3中的人脸识别函数库，且官网中的opencv包中不含有contrib库，所以笔者使用cmake把opencv的所有库一起编译了一下。　　编译后库下载：链接：https://pan.baidu.com/s/1AlmINJM5dvLdp-zvHduDVQ 密码：xcs">
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  673字
+                  675字
                 </span>
               
 
@@ -425,7 +425,7 @@
 <h3 id="Canny检测后的视频"><a href="#Canny检测后的视频" class="headerlink" title="Canny检测后的视频"></a>Canny检测后的视频</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">VideoCapture <span class="title">capture</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    Mat edges;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Mat frame;</span><br><span class="line">        capture &gt;&gt; frame;  <span class="comment">//读取当前帧</span></span><br><span class="line">        cvtColor(frame, edges, COLOR_BGR2GRAY); <span class="comment">// 转化为灰度图像</span></span><br><span class="line">        blur(edges, edges, Size(<span class="number">7</span>, <span class="number">7</span>));</span><br><span class="line">        Canny(edges, edges, <span class="number">0</span>, <span class="number">30</span>, <span class="number">3</span>);</span><br><span class="line">        imshow(<span class="string">"被处理后的视频"</span>, edges);</span><br><span class="line">        <span class="keyword">if</span> (waitKey(<span class="number">30</span>) &gt;= <span class="number">0</span>)  <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="调试中遇到的问题"><a href="#调试中遇到的问题" class="headerlink" title="调试中遇到的问题"></a>调试中遇到的问题</h3><p>问题：<br>出现以下错误：”OpenCV Error: Assertion failed (size.width&gt;0 &amp;&amp; size.height&gt;0) in imshow, file C :\OpenCV\opencv\sources\modules\highgui\src\window.cpp, line 279 terminate called after throwing an instance of ‘cv::Exception’ what(): C:\OpenCV\opencv\sources\modules\highgui\src\window.cpp:279: error: ( -215) size.width&gt;0 &amp;&amp; size.height&gt;0 in function imshow”</p>
 <p>只需要把路径中 \ 改成 / 即可，原因可能是因为路径引起的内存越界问题。</p>
-<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据毛星云的《OpenCV3编程入门》总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
 
       
     </div>
@@ -454,7 +454,7 @@
   <p><span>本文标题:</span><a href="/2018/04/01/Opencv_note1/">OpenCV小试牛刀</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
   <p><span>发布时间:</span>2018年04月01日 - 00:04</p>
-  <p><span>最后更新:</span>2018年04月01日 - 20:04</p>
+  <p><span>最后更新:</span>2018年04月01日 - 21:04</p>
   <p><span>原始链接:</span><a href="/2018/04/01/Opencv_note1/" title="OpenCV小试牛刀">http://teddyovo.tech/2018/04/01/Opencv_note1/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/04/01/Opencv_note1/"  aria-label="复制成功！"></i></span>
   </p>
