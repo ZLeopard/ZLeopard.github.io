@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="C++," />
+  <meta name="keywords" content="OpenCV," />
 
 
 
@@ -89,20 +89,22 @@
 
 
 
-<meta name="description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。需要注意表格区域上下方都要加空行！　　仅为简单示例，以后会进行内容的扩充。">
-<meta name="keywords" content="C++">
+<meta name="description" content="作者：TeddyZhang 简介　　今天是OpenCV开始学习的第一天，主要学习了使用OpenCV对图像中像素点的操作，也就是点操作，如对比度和亮度，还有，对彩色图像的通道的了解以及如何将BGR三个通道进行分离和融合。当然这仅仅是个开始了，后面还有很多有趣的东西了，加油~~　　开发环境：VS2017 + OpenCV3">
+<meta name="keywords" content="OpenCV">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STL库之Vector容器(可变长数组)">
-<meta property="og:url" content="http://teddyovo.tech/2018/01/16/C++_STL_Vector/index.html">
+<meta property="og:title" content="OpenCV之多通道融合及亮度对比度调整">
+<meta property="og:url" content="http://teddyovo.tech/2018/04/03/OpenCV_note2/index.html">
 <meta property="og:site_name" content="Teddy&#39;s Blog">
-<meta property="og:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。需要注意表格区域上下方都要加空行！　　仅为简单示例，以后会进行内容的扩充。">
+<meta property="og:description" content="作者：TeddyZhang 简介　　今天是OpenCV开始学习的第一天，主要学习了使用OpenCV对图像中像素点的操作，也就是点操作，如对比度和亮度，还有，对彩色图像的通道的了解以及如何将BGR三个通道进行分离和融合。当然这仅仅是个开始了，后面还有很多有趣的东西了，加油~~　　开发环境：VS2017 + OpenCV3">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
-<meta property="og:updated_time" content="2018-02-02T08:17:46.982Z">
+<meta property="og:image" content="https://i.loli.net/2018/04/03/5ac371b23305b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/03/5ac37214290b1.png">
+<meta property="og:image" content="https://i.loli.net/2018/04/03/5ac371cd2205b.png">
+<meta property="og:updated_time" content="2018-04-03T12:37:54.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STL库之Vector容器(可变长数组)">
-<meta name="twitter:description" content="作者：TeddyZhang 简介　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。　　而且为了实验使用markdown语法绘制表格的效果。需要注意表格区域上下方都要加空行！　　仅为简单示例，以后会进行内容的扩充。">
-<meta name="twitter:image" content="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png">
+<meta name="twitter:title" content="OpenCV之多通道融合及亮度对比度调整">
+<meta name="twitter:description" content="作者：TeddyZhang 简介　　今天是OpenCV开始学习的第一天，主要学习了使用OpenCV对图像中像素点的操作，也就是点操作，如对比度和亮度，还有，对彩色图像的通道的了解以及如何将BGR三个通道进行分离和融合。当然这仅仅是个开始了，后面还有很多有趣的东西了，加油~~　　开发环境：VS2017 + OpenCV3">
+<meta name="twitter:image" content="https://i.loli.net/2018/04/03/5ac371b23305b.jpg">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://teddyovo.tech/2018/01/16/C++_STL_Vector/"/>
+  <link rel="canonical" href="http://teddyovo.tech/2018/04/03/OpenCV_note2/"/>
 
 
 
 
 
-  <title>STL库之Vector容器(可变长数组) | Teddy's Blog</title>
+  <title>OpenCV之多通道融合及亮度对比度调整 | Teddy's Blog</title>
   
 
 
@@ -276,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/01/16/C++_STL_Vector/">
+    <link itemprop="mainEntityOfPage" href="http://teddyovo.tech/2018/04/03/OpenCV_note2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="TeddyZhang">
@@ -293,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">STL库之Vector容器(可变长数组)</h1>
+          <h1 class="post-title" itemprop="name headline">OpenCV之多通道融合及亮度对比度调整</h1>
         
 
         <div class="post-meta">
@@ -305,8 +307,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T00:00:00+08:00">
-                2018-01-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T00:00:00+08:00">
+                2018-04-03
               </time>
             
 
@@ -346,8 +348,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/01/16/C++_STL_Vector/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/01/16/C++_STL_Vector/" itemprop="commentsCount"></span>
+                <a href="/2018/04/03/OpenCV_note2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/04/03/OpenCV_note2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -369,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  772字
+                  1,175字
                 </span>
               
 
@@ -385,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3分钟
+                  5分钟
                 </span>
               
             </div>
@@ -407,71 +409,18 @@
 
       
         <p><code>作者：TeddyZhang</code></p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/01/05/5a4f83c7a3a17.png" alt=""><br>　　本文主要讲述C++中STL库中的Vector容器的使用方法和概念。<br>　　而且为了实验使用markdown语法绘制表格的效果。需要注意表格区域上下方都要加空行！<br>　　仅为简单示例，以后会进行内容的扩充。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p><img src="https://i.loli.net/2018/04/03/5ac371b23305b.jpg" alt=""><br>　　今天是OpenCV开始学习的第一天，主要学习了使用OpenCV对图像中像素点的操作，也就是点操作，如对比度和亮度，还有，对彩色图像的通道的了解以及如何将BGR三个通道进行分离和融合。当然这仅仅是个开始了，后面还有很多有趣的东西了，加油~~<br>　　开发环境：VS2017 + OpenCV3</p>
 <a id="more"></a>
-<h3 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h3><p>　　Vector为向量，属于可变长的动态数组。使用时必须包含<vector>，支持随机访问迭代器，其原理是首先分配一定长的内存用于储存数据，当数据量超出了原定长度，那么需要重新开辟新的空间。正因为如此，所以其在尾部插入元素速度很快，<code>一般</code>为常数时间，而在中间插入慢。<br>注意：<code>所有的STL算法均可以对vector进行操作</code></vector></p>
-<h4 id="Vector成员函数"><a href="#Vector成员函数" class="headerlink" title="Vector成员函数"></a>Vector成员函数</h4><p>1、构造函数初始化</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">成员函数</th>
-<th style="text-align:center">作用 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">vector();</td>
-<td style="text-align:center">无参构造函数，将容器初始化成空的 </td>
-</tr>
-<tr>
-<td style="text-align:left">vector(int n);</td>
-<td style="text-align:center">将容器初始化成有n个元素 </td>
-</tr>
-<tr>
-<td style="text-align:left">vector(int n, const T &amp; val);</td>
-<td style="text-align:center">假定元素类型是T，将容器初始化成有n个元素，每个值都是val </td>
-</tr>
-<tr>
-<td style="text-align:left">vector(iterator first, iterator last);</td>
-<td style="text-align:center">将容器初始化为与别的容器上的区间[first, last)一致的内容 </td>
-</tr>
-</tbody>
-</table>
-<p>2、其他常用函数</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">成员函数</th>
-<th style="text-align:center">作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">void pop_back();</td>
-<td style="text-align:center">删除容器末尾的元素</td>
-</tr>
-<tr>
-<td style="text-align:left">void push_back(const T &amp; val);</td>
-<td style="text-align:center">将val添加到容器的尾部</td>
-</tr>
-<tr>
-<td style="text-align:left">int size();</td>
-<td style="text-align:center">返回容器中的个数</td>
-</tr>
-<tr>
-<td style="text-align:left">T &amp; front();</td>
-<td style="text-align:center">返回容器中第一个元素的引用</td>
-</tr>
-<tr>
-<td style="text-align:left">T &amp; back();</td>
-<td style="text-align:center">返回容器中最后一个元素的引用</td>
-</tr>
-</tbody>
-</table>
-<p>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(<span class="number">5</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; v.end() - v.begin() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; v.size(); i++)&#123;</span><br><span class="line">        v[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    v.at(<span class="number">4</span>) = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="string">","</span>;   <span class="comment">// 随机访问</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v2(a, a+<span class="number">5</span>);       <span class="comment">// 构造函数初始化的最后一个，使用指定区间初始化</span></span><br><span class="line">    v2.insert(v2.begin()+<span class="number">2</span>, <span class="number">13</span>);   <span class="comment">// 在v2.begin+2的位置插入13，其余内容向后移动</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; v2.size(); i++)&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; v2.at(i) &lt;&lt; <span class="string">","</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="创建并使用二维数组"><a href="#创建并使用二维数组" class="headerlink" title="创建并使用二维数组"></a>创建并使用二维数组</h4><p>使用两个vector进行相互嵌套，可以构成二维数组，比如：<br>　　vector&lt; vector<int> &gt; v(3);<br>即v有三个元素，每个元素都是vector<int> 容器，因此构成二维数组。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; v(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">            v[i].push_back(j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; ++j)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; v.at(i).at(j) &lt;&lt; <span class="string">","</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></int></int></p>
-<p>运行结果为：<br>0,1,2,3,<br>0,1,2,3,<br>0,1,2,3,</p>
-<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据B站上<a href="https://www.bilibili.com/video/av12638525/?from=search&amp;seid=4715317441337975604#page=19" target="_blank" rel="noopener">北大C++教程</a><br>总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
+<h3 id="颜色通道分离与融合"><a href="#颜色通道分离与融合" class="headerlink" title="颜色通道分离与融合"></a>颜色通道分离与融合</h3><p>　　通道是指在RGB色彩模式下单独的红色、绿色、蓝色部分，也就是一个彩色图像是由这三个通道组成的。OpenCV中可以使用split函数对彩色图像进行颜色通道分离，然后使用merge函数进行多通道融合。通过定义ROI(region of interest)和addWeighted函数可以对两个图像进行线性混合操作，即ROI图像区域的图像叠加。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  <span class="comment">//使用vector一定要加上std命名空间</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv;   </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mat srcImag;</span><br><span class="line">    Mat logoImag;</span><br><span class="line">    <span class="built_in">vector</span> &lt;Mat&gt; channels;</span><br><span class="line">    Mat imagBlueChannels;</span><br><span class="line">    logoImag = imread(<span class="string">"D:/Desktop/opencv练习/dota_logo.jpg"</span>, <span class="number">0</span>);   <span class="comment">//以灰度图像读入</span></span><br><span class="line">    srcImag = imread(<span class="string">"D:/Desktop/opencv练习/dota_jugg.jpg"</span>);</span><br><span class="line">    split(srcImag, channels);   <span class="comment">// 读入时通道顺序是按照BRG并不是RGB</span></span><br><span class="line">    imagBlueChannels = channels.at(<span class="number">0</span>);</span><br><span class="line">    addWeighted(imagBlueChannels(Rect(<span class="number">500</span>, <span class="number">250</span>, logoImag.cols, logoImag.rows)), <span class="number">1.0</span>, logoImag, <span class="number">0.5</span>, <span class="number">0.</span>,</span><br><span class="line">        imagBlueChannels(Rect(<span class="number">500</span>, <span class="number">250</span>, logoImag.cols, logoImag.rows)));   <span class="comment">//通过Rect函数定义RIO</span></span><br><span class="line">    <span class="comment">//通过定义ROI区域，然后将logoImag和分离蓝色通道后的图片进行线性混合</span></span><br><span class="line">    merge(channels, srcImag);  <span class="comment">//可以将单通道数组组合并成一个多通道的数组</span></span><br><span class="line">    namedWindow(<span class="string">"Blue Channel~"</span>);</span><br><span class="line">    imshow(<span class="string">"Blue Channel~"</span>, srcImag);</span><br><span class="line">    waitKey();  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行效果：</p>
+<p><img src="https://i.loli.net/2018/04/03/5ac37214290b1.png" alt=""></p>
+<h3 id="对图像进行对比度和亮度调整"><a href="#对图像进行对比度和亮度调整" class="headerlink" title="对图像进行对比度和亮度调整"></a>对图像进行对比度和亮度调整</h3><p>　　图像亮度和对比度的调整操作，其实属于图像处理变换中比较简单的一种——点操作（pointoperators）。点操作有一个特点，仅仅根据输入像素值（有时可加上某些全局信息或参数），来计算相应的输出像素值。这类算子包括亮度（brightness）和对比度（contrast）调整，以及颜色校正（colorcorrection）和变换（transformations）。<br>　　实质是对像素点乘上一个常数（对比度的调节）以及加上一个常数（对亮度的调节）。<br>　　<code>公式：g(i,j)=a*f(i,j)+b</code><br>其中 f(i,j)为原像素点，g(i,j)为处理后的像素点，a为增益并控制图像对比度，b为偏置控制图像亮度<br>在计算时可能会有溢出，故对结果用<code>saturate_cast</code>进行转换，确保期为有效值。<br>示例代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv2/opencv.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  <span class="comment">//使用vector一定要加上std命名空间</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> cv; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ContrastAndBright</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">void</span> *)</span></span>;</span><br><span class="line"><span class="keyword">int</span> ContrastValue;</span><br><span class="line"><span class="keyword">int</span> BrightValue;</span><br><span class="line">Mat srcImage, dstImage;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    system(<span class="string">"color 2F"</span>);</span><br><span class="line">    srcImage = imread(<span class="string">"D:/Desktop/opencv练习/1.jpg"</span>);</span><br><span class="line">    dstImage = Mat::zeros(srcImage.size(), srcImage.type());   <span class="comment">// 创建和原图大小类型一致的Mat空间</span></span><br><span class="line">    ContrastValue = <span class="number">80</span>;       <span class="comment">//一般a的值是0-3，但实际数值0-300，需乘以0.01</span></span><br><span class="line">    BrightValue = <span class="number">80</span>;</span><br><span class="line">    </span><br><span class="line">    namedWindow(<span class="string">"【效果图窗口】"</span>);</span><br><span class="line">    createTrackbar(<span class="string">"对比度："</span>, <span class="string">"【效果图窗口】"</span>, &amp;ContrastValue, <span class="number">300</span>, ContrastAndBright);   <span class="comment">// ContrastAndBright为一个回调函数</span></span><br><span class="line">    createTrackbar(<span class="string">"亮   度："</span>, <span class="string">"【效果图窗口】"</span>, &amp;BrightValue, <span class="number">200</span>, ContrastAndBright);</span><br><span class="line">    ContrastAndBright(ContrastValue, <span class="number">0</span>);</span><br><span class="line">    ContrastAndBright(BrightValue, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">char</span>(waitKey(<span class="number">1</span>) != <span class="string">'q'</span>))&#123;&#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ContrastAndBright</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">void</span> *)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    namedWindow(<span class="string">"【原始图窗口】"</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> y = <span class="number">0</span>; y &lt; srcImage.rows; y++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>; x &lt; srcImage.cols; x++)   <span class="comment">//vec3b是8U类型的彩色图像，如三通道的float类型可以使用&lt;vec3f&gt;</span></span><br><span class="line">        &#123;                                         <span class="comment">//使用at&lt;Vec3b&gt;(i,j)[0]实际访问(i,j)位置像素的B分量，在OpenCV中按BGR顺序</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; <span class="number">3</span>; c++)</span><br><span class="line">            &#123;</span><br><span class="line">                dstImage.at&lt;Vec3b&gt;(y, x)[c] = saturate_cast&lt;uchar&gt;((ContrastValue * <span class="number">0.01</span>)*(srcImage.at&lt;Vec3b&gt;(y, x)[c]) + BrightValue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    imshow(<span class="string">"【原始图窗口】"</span>, srcImage);</span><br><span class="line">    imshow(<span class="string">"【效果图窗口】"</span>, dstImage);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行效果：</p>
+<p><img src="https://i.loli.net/2018/04/03/5ac371cd2205b.png" alt=""></p>
+<h3 id="所用素材"><a href="#所用素材" class="headerlink" title="所用素材"></a>所用素材</h3><p>　　在github中，地址：<a href="https://github.com/ZLeopard/OpenCV_PIC" target="_blank" rel="noopener">https://github.com/ZLeopard/OpenCV_PIC</a></p>
+<h3 id="调试中遇到的问题"><a href="#调试中遇到的问题" class="headerlink" title="调试中遇到的问题"></a>调试中遇到的问题</h3><p>问题：<br>出现以下错误：”OpenCV Error: Assertion failed (size.width&gt;0 &amp;&amp; size.height&gt;0) in imshow, file C :\OpenCV\opencv\sources\modules\highgui\src\window.cpp, line 279 terminate called after throwing an instance of ‘cv::Exception’ what(): C:\OpenCV\opencv\sources\modules\highgui\src\window.cpp:279: error: ( -215) size.width&gt;0 &amp;&amp; size.height&gt;0 in function imshow”</p>
+<p>只需要把路径中 \ 改成 / 即可，原因可能是因为路径引起的内存越界问题。</p>
+<h3 id="关于本文"><a href="#关于本文" class="headerlink" title="关于本文"></a>关于本文</h3><p>　　本文是根据毛星云的《OpenCV3编程入门》总结而成的，并自己加以理解所写的，可能中间理解会有所偏差，如有歧义，还请告知笔者，联系方式可在博客中查找到！！！<br>　　若有问题，欢迎在下方评论，谢谢O(∩_∩)O  </p>
 
       
     </div>
@@ -497,12 +446,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/01/16/C++_STL_Vector/">STL库之Vector容器(可变长数组)</a></p>
+  <p><span>本文标题:</span><a href="/2018/04/03/OpenCV_note2/">OpenCV之多通道融合及亮度对比度调整</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 TeddyZhang 的个人博客">TeddyZhang</a></p>
-  <p><span>发布时间:</span>2018年01月16日 - 00:01</p>
-  <p><span>最后更新:</span>2018年02月02日 - 16:02</p>
-  <p><span>原始链接:</span><a href="/2018/01/16/C++_STL_Vector/" title="STL库之Vector容器(可变长数组)">http://teddyovo.tech/2018/01/16/C++_STL_Vector/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/01/16/C++_STL_Vector/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年04月03日 - 00:04</p>
+  <p><span>最后更新:</span>2018年04月03日 - 20:04</p>
+  <p><span>原始链接:</span><a href="/2018/04/03/OpenCV_note2/" title="OpenCV之多通道融合及亮度对比度调整">http://teddyovo.tech/2018/04/03/OpenCV_note2/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://teddyovo.tech/2018/04/03/OpenCV_note2/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -562,7 +511,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+            <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i> OpenCV</a>
           
         </div>
       
@@ -575,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/15/C++_STL_01/" rel="next" title="初识STL库(数据结构与算法)">
-                <i class="fa fa-chevron-left"></i> 初识STL库(数据结构与算法)
+              <a href="/2018/04/01/Opencv_note1/" rel="next" title="OpenCV小试牛刀">
+                <i class="fa fa-chevron-left"></i> OpenCV小试牛刀
               </a>
             
           </div>
@@ -584,10 +533,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/17/C++_STL_List/" rel="prev" title="STL库之List容器(双向对列)">
-                STL库之List容器(双向对列) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -808,7 +753,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vector"><span class="nav-number">2.</span> <span class="nav-text">Vector</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector成员函数"><span class="nav-number">2.1.</span> <span class="nav-text">Vector成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建并使用二维数组"><span class="nav-number">2.2.</span> <span class="nav-text">创建并使用二维数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">3.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色通道分离与融合"><span class="nav-number">2.</span> <span class="nav-text">颜色通道分离与融合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对图像进行对比度和亮度调整"><span class="nav-number">3.</span> <span class="nav-text">对图像进行对比度和亮度调整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#所用素材"><span class="nav-number">4.</span> <span class="nav-text">所用素材</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调试中遇到的问题"><span class="nav-number">5.</span> <span class="nav-text">调试中遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于本文"><span class="nav-number">6.</span> <span class="nav-text">关于本文</span></a></li></ol></div>
             
 
           </div>
